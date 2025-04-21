@@ -1,5 +1,4 @@
 import React from 'react';
-import PostDisplay from './PostDisplay';
 
 interface PostResult {
   id: number;
