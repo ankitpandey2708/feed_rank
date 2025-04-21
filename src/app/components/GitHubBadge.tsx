@@ -5,7 +5,7 @@ import Link from 'next/link';
 export function GitHubBadge() {
   return (
     <Link
-      href="https://github.com/ankitpandey2708/dhbvn-web"
+      href="https://github.com/ankitpandey2708/feed_rank"
       className="fixed bottom-0 right-0 z-[100]"
       target="_blank"
       rel="noopener noreferrer"
