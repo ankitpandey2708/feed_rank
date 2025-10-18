@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { GitHubBadge } from "./components/GitHubBadge";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const interFont = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
 });
 
@@ -26,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
+        className={`${interFont.variable} ${jetbrainsMono.variable} antialiased min-h-screen`}
         style={{
           background: "var(--background)",
           color: "var(--foreground)",
@@ -40,7 +39,7 @@ export default function RootLayout({
         <main id="main-content" className="max-w-4xl mx-auto" style={{ paddingBottom: "var(--space-8)" }}>
           {children}
         </main>
-        <GitHubBadge />
+      
       </body>
     </html>
   );
