@@ -18,11 +18,45 @@ const DraggablePostDisplay: React.FC<DraggablePostDisplayProps> = ({ post, index
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className={`border rounded bg-white shadow-sm transition-shadow text-black flex flex-col items-center justify-center text-center p-1 sm:p-2 md:p-2 ${snapshot.isDragging ? "ring-2 ring-blue-500" : ""}`}
-          style={{ ...provided.draggableProps.style, color: '#111', backgroundColor: '#fff', minHeight: 36 } }
+          style={{
+            ...provided.draggableProps.style,
+            padding: "var(--space-4)",
+            backgroundColor: snapshot.isDragging ? "#3b82f6" : "var(--background)",
+            border: "1px solid #e5e7eb",
+            borderRadius: "var(--radius-md)",
+            boxShadow: snapshot.isDragging ? "var(--shadow-lg)" : "var(--shadow-sm)",
+            transition: "all 0.2s ease",
+            cursor: "grab",
+            userSelect: "none",
+            minHeight: "80px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            color: snapshot.isDragging ? "#ffffff" : "var(--foreground)",
+          }}
         >
-          <div className="font-bold text-black leading-tight text-base sm:text-lg">Post #{post.id}</div>
-          <div className="text-black text-xs sm:text-sm leading-tight mt-1">Upvotes: {post.upvotes} | Downvotes: {post.downvotes}</div>
+          <div
+            style={{
+              fontSize: "var(--text-lg)",
+              fontWeight: "600",
+              lineHeight: "1.4",
+              marginBottom: "var(--space-2)",
+              color: "inherit"
+            }}
+          >
+            Post #{post.id}
+          </div>
+          <div
+            style={{
+              fontSize: "var(--text-sm)",
+              color: snapshot.isDragging ? "#ffffff" : "#6b7280",
+              lineHeight: "1.5"
+            }}
+          >
+            ↑ {post.upvotes} ↓ {post.downvotes}
+          </div>
         </div>
       )}
     </Draggable>

@@ -27,11 +27,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        style={{ background: "var(--background)", color: "var(--foreground)", transition: "background 0.3s, color 0.3s" }}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
+        style={{
+          background: "var(--background)",
+          color: "var(--foreground)",
+          transition: "background 0.3s, color 0.3s",
+          padding: "var(--space-4)",
+          lineHeight: "1.5",
+          minHeight: "100vh"
+        }}
       >
         <ThemeProvider>
-          {children}
+          <main className="max-w-4xl mx-auto" style={{ paddingBottom: "var(--space-8)" }}>
+            {children}
+          </main>
           <GitHubBadge />
         </ThemeProvider>
       </body>

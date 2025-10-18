@@ -79,48 +79,113 @@ export default function Home() {
 
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative" }}>
-      <ThemeToggle theme={theme} setTheme={setTheme} />
-      <h1 className="text-2xl font-bold mb-4">Rank your Feed</h1>
+    <div className="flex flex-col items-center" style={{ gap: "var(--space-6)", paddingTop: "var(--space-8)" }}>
+      <div style={{ position: "absolute", top: "var(--space-4)", right: "var(--space-4)" }}>
+        <ThemeToggle theme={theme} setTheme={setTheme} />
+      </div>
+
+      <h1
+        style={{
+          fontSize: "var(--text-2xl)",
+          fontWeight: "600",
+          margin: 0,
+          marginBottom: "var(--space-6)",
+          textAlign: "center"
+        }}
+      >
+        Rank your Feed
+      </h1>
+
       {!isSubmitted ? (
-        <>
-          <div className="mb-6 w-full max-w-md">
-            <p className="mb-2">Your users rate stuff on your site. You want to put the highest-rated stuff at the top and lowest-rated at the bottom. Drag the posts below on how you think your feed should look.</p>
-            <DragDropContext
-              onDragEnd={(result) => {
-                if (!result.destination) return;
-                const reordered = Array.from(posts);
-                const [removed] = reordered.splice(result.source.index, 1);
-                reordered.splice(result.destination.index, 0, removed);
-                setPosts(reordered);
-              }}
-            >
-              <Droppable droppableId="posts-droppable">
-                {(provided) => (
-                  <div ref={provided.innerRef} {...provided.droppableProps}>
-                    {posts.map((post, idx) => (
-                      <DraggablePostDisplay key={post.id} post={post} index={idx} />
-                    ))}
-                    {provided.placeholder}
-                  </div>
-                )}
-              </Droppable>
-            </DragDropContext>
+        <div className="w-full max-w-2xl">
+          <div style={{
+            marginBottom: "var(--space-6)",
+            padding: "var(--space-6)",
+            borderRadius: "var(--radius-md)",
+            background: "var(--background)",
+            border: "1px solid #e5e7eb",
+            boxShadow: "var(--shadow-sm)"
+          }}>
+            <p style={{
+              margin: 0,
+              marginBottom: "var(--space-4)",
+              fontSize: "var(--text-base)",
+              lineHeight: "1.6",
+              color: "var(--foreground)"
+            }}>
+              Your users rate stuff on your site. You want to put the highest-rated stuff at the top and lowest-rated at the bottom. Drag the posts below to show how you think your feed should look.
+            </p>
+
+            <div style={{ marginBottom: "var(--space-4)" }}>
+              <DragDropContext
+                onDragEnd={(result) => {
+                  if (!result.destination) return;
+                  const reordered = Array.from(posts);
+                  const [removed] = reordered.splice(result.source.index, 1);
+                  reordered.splice(result.destination.index, 0, removed);
+                  setPosts(reordered);
+                }}
+              >
+                <Droppable droppableId="posts-droppable">
+                  {(provided) => (
+                    <div ref={provided.innerRef} {...provided.droppableProps} style={{ gap: "var(--space-2)" }}>
+                      {posts.map((post, idx) => (
+                        <DraggablePostDisplay key={post.id} post={post} index={idx} />
+                      ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </DragDropContext>
+            </div>
+
             {error && (
-              <div className="text-red-600 mt-2" role="alert">{error}</div>
+              <div
+                style={{
+                  color: "#dc2626",
+                  fontSize: "var(--text-sm)",
+                  marginTop: "var(--space-2)"
+                }}
+                role="alert"
+              >
+                {error}
+              </div>
             )}
           </div>
-          <button
-            className="bg-green-600 text-white px-4 py-2 rounded disabled:opacity-50"
-            onClick={handleSubmit}
-            disabled={!isValidRanks()}
-            aria-disabled={!isValidRanks()}
-          >
-            Submit
-          </button>
-        </>
+
+          <div style={{ textAlign: "center" }}>
+            <button
+              style={{
+                backgroundColor: "#16a34a",
+                color: "white",
+                padding: "var(--space-3) var(--space-6)",
+                borderRadius: "var(--radius-md)",
+                border: "2px solid transparent",
+                fontSize: "var(--text-base)",
+                fontWeight: "500",
+                cursor: isValidRanks() ? "pointer" : "not-allowed",
+                opacity: isValidRanks() ? 1 : 0.5,
+                transition: "all 0.2s ease",
+                outline: "none",
+              }}
+              onFocus={(e) => {
+                if (isValidRanks()) {
+                  e.target.style.borderColor = "#ffffff";
+                }
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = "transparent";
+              }}
+              onClick={handleSubmit}
+              disabled={!isValidRanks()}
+              aria-disabled={!isValidRanks()}
+            >
+              Submit Ranking
+            </button>
+          </div>
+        </div>
       ) : (
-        <>
+        <div className="w-full max-w-4xl">
           <ResultsDisplay
             score={score ?? 0}
             resultsData={posts.map((post, idx) => ({
@@ -132,13 +197,33 @@ export default function Home() {
               userRank: idx + 1,
             }))}
           />
-          <button
-            className="mt-6 bg-green-600 text-white px-4 py-2 rounded"
-            onClick={handleRestart}
-          >
-            Play Again
-          </button>
-        </>
+
+          <div style={{ textAlign: "center", marginTop: "var(--space-6)" }}>
+            <button
+              style={{
+                backgroundColor: "#16a34a",
+                color: "white",
+                padding: "var(--space-3) var(--space-6)",
+                borderRadius: "var(--radius-md)",
+                border: "2px solid transparent",
+                fontSize: "var(--text-base)",
+                fontWeight: "500",
+                cursor: "pointer",
+                transition: "all 0.2s ease",
+                outline: "none",
+              }}
+              onFocus={(e) => {
+                e.target.style.borderColor = "#ffffff";
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = "transparent";
+              }}
+              onClick={handleRestart}
+            >
+              Play Again
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
