@@ -21,8 +21,8 @@ const DraggablePostDisplay: React.FC<DraggablePostDisplayProps> = ({ post, index
           style={{
             ...provided.draggableProps.style,
             padding: "var(--space-4)",
-            backgroundColor: snapshot.isDragging ? "#3b82f6" : "var(--background)",
-            border: "1px solid #e5e7eb",
+            backgroundColor: snapshot.isDragging ? "var(--color-primary)" : "var(--background)",
+            border: `1px solid ${snapshot.isDragging ? "var(--color-primary)" : "var(--color-gray-200)"}`,
             borderRadius: "var(--radius-md)",
             boxShadow: snapshot.isDragging ? "var(--shadow-lg)" : "var(--shadow-sm)",
             transition: "all 0.2s ease",
@@ -51,7 +51,7 @@ const DraggablePostDisplay: React.FC<DraggablePostDisplayProps> = ({ post, index
           <div
             style={{
               fontSize: "var(--text-sm)",
-              color: snapshot.isDragging ? "#ffffff" : "#6b7280",
+              color: snapshot.isDragging ? "#ffffff" : "var(--color-gray-500)",
               lineHeight: "1.5"
             }}
           >

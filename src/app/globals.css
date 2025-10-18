@@ -27,25 +27,60 @@
   --radius-md: 8px;
   --radius-lg: 12px;
 
+  /* Color Palette - Limited, systematic colors */
+  --color-primary: #2563eb;       /* Blue-600 */
+  --color-primary-dark: #1d4ed8;  /* Blue-700 */
+  --color-primary-light: #3b82f6; /* Blue-500 */
+  --color-secondary: #6b7280;     /* Gray-500 */
+  --color-success: #059669;       /* Emerald-600 */
+  --color-success-light: #10b981; /* Emerald-500 */
+  --color-warning: #d97706;       /* Amber-600 */
+  --color-warning-light: #f59e0b; /* Amber-500 */
+  --color-error: #dc2626;         /* Red-600 */
+  --color-error-light: #ef4444;   /* Red-500 */
+
+  /* Neutral Grays - Limited palette */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+
+  /* Warning text colors */
+  --color-warning-dark: #78350f;   /* Dark amber text */
+  --color-error-dark: #7f1d1d;     /* Dark red text */
+
   /* Shadow Scale */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+
+  /* Button System - Consistent hierarchy */
+  --button-height: 44px;           /* 44px minimum for accessibility */
+  --button-padding-x: var(--space-6);
+  --button-padding-y: var(--space-3);
+  --button-border-radius: var(--radius-md);
+  --button-font-weight: 500;
+
+  /* Transitions - Consistent system */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 200ms ease-in-out;
+  --transition-slow: 300ms ease-in-out;
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+
 
 body {
   background: var(--background);
@@ -53,6 +88,44 @@ body {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   line-height: 1.5;
   font-size: var(--text-base);
+}
+
+/* Improve readability with max width for body text */
+p, .body-text {
+  max-width: 50ch; /* Approximately 75 characters at 16px font size */
+}
+
+/* Accessibility & Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus Styles for Accessibility */
+.focus-visible,
+*:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Skip to main content link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #000;
+  color: #fff;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 1000;
+  border-radius: var(--radius-md);
+}
+
+.skip-link:focus {
+  top: 6px;
 }
 
 /* Responsive Design */
@@ -70,11 +143,29 @@ body {
     font-size: 16px;
     line-height: 1.6;
   }
+
+  /* Improve touch targets on mobile */
+  button, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }
 
 @media (max-width: 480px) {
   :root {
     --text-2xl: 24px;
     --text-lg: 16px;
+  }
+
+  body {
+    font-size: 15px; /* Prevent zoom on iOS */
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --background: #fff;
+    --foreground: #000;
   }
 }

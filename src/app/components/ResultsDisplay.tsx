@@ -33,7 +33,7 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ score, resultsData }) =
       style={{
         padding: "var(--space-4)",
         backgroundColor: "var(--background)",
-        border: "1px solid #e5e7eb",
+        border: "1px solid var(--color-gray-200)",
         borderRadius: "var(--radius-md)",
         boxShadow: "var(--shadow-sm)",
         transition: "all 0.2s ease",
@@ -59,7 +59,7 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ score, resultsData }) =
       <div
         style={{
           fontSize: "var(--text-sm)",
-          color: "#6b7280",
+          color: "var(--color-secondary)",
           lineHeight: "1.5",
           marginBottom: "var(--space-1)"
         }}
@@ -70,7 +70,7 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ score, resultsData }) =
         <div
           style={{
             fontSize: "var(--text-xs)",
-            color: "#3b82f6",
+            color: "var(--color-primary-light)",
             fontWeight: "600",
             fontFamily: "monospace",
             textAlign: "right"
@@ -90,7 +90,7 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ score, resultsData }) =
         marginBottom: "var(--space-8)",
         padding: "var(--space-6)",
         backgroundColor: "var(--background)",
-        border: "1px solid #e5e7eb",
+        border: "1px solid var(--color-gray-200)",
         borderRadius: "var(--radius-lg)",
         boxShadow: "var(--shadow-sm)"
       }}>
@@ -108,7 +108,7 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ score, resultsData }) =
         <p
           style={{
             fontSize: "var(--text-base)",
-            color: "#6b7280",
+            color: "var(--color-secondary)",
             margin: 0,
             lineHeight: "1.6"
           }}
@@ -125,7 +125,7 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ score, resultsData }) =
         <p
           style={{
             fontSize: "var(--text-base)",
-            color: "#6b7280",
+            color: "var(--color-secondary)",
             lineHeight: "1.6",
             margin: 0,
             marginBottom: "var(--space-6)",
@@ -177,7 +177,7 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ score, resultsData }) =
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  color: "#3b82f6",
+                  color: "var(--color-primary-light)",
                   textDecoration: "underline",
                   fontSize: "inherit"
                 }}
@@ -198,10 +198,10 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ score, resultsData }) =
       {score < 5 && (
         <div style={{
           textAlign: "center",
-          backgroundColor: "#fef3c7",
+          backgroundColor: "var(--color-warning-light)",
           padding: "var(--space-6)",
           borderRadius: "var(--radius-lg)",
-          border: "1px solid #fbbf24",
+          border: `1px solid var(--color-warning)`,
           maxWidth: "600px",
           margin: "0 auto"
         }}>
@@ -210,7 +210,7 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ score, resultsData }) =
               fontSize: "var(--text-lg)",
               fontWeight: "600",
               marginBottom: "var(--space-3)",
-              color: "#92400e"
+              color: "var(--color-warning-dark)"
             }}
           >
             Why the Difference?
@@ -218,7 +218,7 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ score, resultsData }) =
           <p
             style={{
               fontSize: "var(--text-base)",
-              color: "#78350f",
+              color: "var(--color-warning-dark)",
               lineHeight: "1.6",
               margin: 0,
               marginBottom: "var(--space-2)"
@@ -229,7 +229,7 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ score, resultsData }) =
           <p
             style={{
               fontSize: "var(--text-sm)",
-              color: "#92400e",
+              color: "var(--color-warning-dark)",
               lineHeight: "1.6",
               margin: 0
             }}

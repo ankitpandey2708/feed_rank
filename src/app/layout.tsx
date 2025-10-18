@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "./ThemeContext";
 import { GitHubBadge } from "./components/GitHubBadge";
 
 const geistSans = Geist({
@@ -37,12 +36,11 @@ export default function RootLayout({
           minHeight: "100vh"
         }}
       >
-        <ThemeProvider>
-          <main className="max-w-4xl mx-auto" style={{ paddingBottom: "var(--space-8)" }}>
-            {children}
-          </main>
-          <GitHubBadge />
-        </ThemeProvider>
+        <a href="#main-content" className="skip-link">Skip to main content</a>
+        <main id="main-content" className="max-w-4xl mx-auto" style={{ paddingBottom: "var(--space-8)" }}>
+          {children}
+        </main>
+        <GitHubBadge />
       </body>
     </html>
   );
