@@ -81,7 +81,7 @@ export default function Home() {
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative" }}>
       <ThemeToggle theme={theme} setTheme={setTheme} />
-      <h1 className="text-2xl font-bold mb-4">Feed Ranking Game</h1>
+      <h1 className="text-2xl font-bold mb-4">Rank your Feed</h1>
       {!isSubmitted ? (
         <>
           <div className="mb-6 w-full max-w-md">
