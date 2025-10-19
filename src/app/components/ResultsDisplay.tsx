@@ -3,11 +3,10 @@ import { PostResult } from '@/types';
 interface ResultsDisplayProps {
   score: number;
   resultsData: PostResult[];
-  description?: string;
   keyInsight?: string;
 }
 
-const ResultsDisplay = ({ score, resultsData, description, keyInsight }: ResultsDisplayProps) => {
+const ResultsDisplay = ({ score, resultsData, keyInsight }: ResultsDisplayProps) => {
   // Sort data for each column
   const userOrder = [...resultsData].sort((a, b) => a.userRank - b.userRank);
   const correctOrder = [...resultsData].sort((a, b) => a.actualRank - b.actualRank);
@@ -92,26 +91,12 @@ const ResultsDisplay = ({ score, resultsData, description, keyInsight }: Results
             fontSize: "var(--text-2xl)",
             fontWeight: "600",
             margin: 0,
-            marginBottom: description ? "var(--space-1)" : "var(--space-2)",
+            marginBottom: "var(--space-2)",
             color: "var(--foreground)"
           }}
         >
           Your Score: {score} / 3
         </h2>
-        {description && (
-          <p
-            style={{
-              fontSize: "var(--text-base)",
-              color: "var(--color-secondary)",
-              lineHeight: "1.5",
-              margin: 0,
-              marginBottom: "var(--space-2)",
-              fontStyle: "italic"
-            }}
-          >
-            {description}
-          </p>
-        )}
       </div>
 
       {/* Mathematical Explanation */}

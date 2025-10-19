@@ -15,7 +15,6 @@ interface ExampleSet {
 // Wilson score should prefer B over A despite A's higher ratio
 const exampleSet1: ExampleSet = {
   id: 1,
-  description: "Same ratio, different certainty",
   keyInsight: "Posts with the same approval ratio but different vote counts rank differently due to statistical certainty.",
   posts: [
     { id: 1, upvotes: 3, downvotes: 0 },    // 100% but very uncertain
@@ -28,7 +27,6 @@ const exampleSet1: ExampleSet = {
 // High-vote moderate performance vs low-vote perfect performance
 const exampleSet2: ExampleSet = {
   id: 2,
-  description: "Statistical certainty in action",
   keyInsight: "Even with fewer votes, a 90% approval rating can rank above a 95% approval with more votes due to confidence intervals.",
   posts: [
     { id: 1, upvotes: 5, downvotes: 0 },    // 100% perfect but uncertain
@@ -41,7 +39,6 @@ const exampleSet2: ExampleSet = {
 // Where the obvious winner isn't the statistical winner
 const exampleSet3: ExampleSet = {
   id: 3,
-  description: "When statistics defy intuition",
   keyInsight: "Wilson scoring might rank a post with fewer total votes higher than one with more votes and similar ratios.",
   posts: [
     { id: 1, upvotes: 9, downvotes: 1 },    // 90% with medium certainty
@@ -54,7 +51,6 @@ const exampleSet3: ExampleSet = {
 // Very small vote counts where random chance plays a big role
 const exampleSet4: ExampleSet = {
   id: 4,
-  description: "Small sample struggles",
   keyInsight: "With very few votes, it's hard to know if a post is truly better or just lucky.",
   posts: [
     { id: 1, upvotes: 2, downvotes: 0 },    // 100% but extremely uncertain
@@ -67,7 +63,6 @@ const exampleSet4: ExampleSet = {
 // Showing Wilson score's different behavior at scale
 const exampleSet5: ExampleSet = {
   id: 5,
-  description: "Large scale ranking differences",
   keyInsight: "Even with thousands of votes, small percentage differences can lead to ranking changes.",
   posts: [
     { id: 1, upvotes: 900, downvotes: 100 }, // 90% very certain
