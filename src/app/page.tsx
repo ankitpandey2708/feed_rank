@@ -25,9 +25,11 @@ export default function Home() {
       {!isSubmitted ? (
         <div className="w-full max-w-2xl">
           <div className="mb-6 p-6 bg-white border border-gray-300 rounded-lg shadow-sm">
-            <p className="mb-4 text-base text-gray-900 leading-relaxed">
-              Your users rate stuff on your site. You want to put the highest-rated stuff at the top and lowest-rated at the bottom. Drag the posts below to show how you think your feed should look.
-            </p>
+            <div className="mb-4 flex justify-center">
+              <p className="text-base text-gray-900 leading-relaxed text-center">
+                Your users rate stuff on your site. You want to put the highest-rated stuff at the top and lowest-rated at the bottom. Drag the posts below to show how you think your feed should look.
+              </p>
+            </div>
 
             <div className="mb-4">
               <DragDropContext onDragEnd={handleDragEnd}
