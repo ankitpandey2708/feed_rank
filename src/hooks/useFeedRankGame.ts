@@ -34,7 +34,7 @@ export function useFeedRankGame() {
     setPosts(generateCuratedPosts());
     setIsSubmitted(false);
     setScore(null);
-    setCurrentKeyInsight("");
+    // Don't clear keyInsight here - let generateCuratedPosts set it
   };
 
   const handleDragEnd = (result: any) => {
