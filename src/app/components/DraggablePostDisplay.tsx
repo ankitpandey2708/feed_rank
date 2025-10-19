@@ -1,4 +1,3 @@
-import React from "react";
 import { Draggable } from "@hello-pangea/dnd";
 import { BasicPost } from "@/types";
 
@@ -7,7 +6,7 @@ interface DraggablePostDisplayProps {
   index: number;
 }
 
-const DraggablePostDisplay: React.FC<DraggablePostDisplayProps> = ({ post, index }) => {
+const DraggablePostDisplay = ({ post, index }: DraggablePostDisplayProps) => {
   return (
     <Draggable draggableId={post.id.toString()} index={index}>
       {(provided, snapshot) => (

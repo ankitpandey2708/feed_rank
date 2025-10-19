@@ -1,4 +1,3 @@
-import React from 'react';
 import { PostResult } from '@/types';
 
 interface ResultsDisplayProps {
@@ -6,7 +5,7 @@ interface ResultsDisplayProps {
   resultsData: PostResult[];
 }
 
-const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ score, resultsData }) => {
+const ResultsDisplay = ({ score, resultsData }: ResultsDisplayProps) => {
   // Sort data for each column
   const userOrder = [...resultsData].sort((a, b) => a.userRank - b.userRank);
   const correctOrder = [...resultsData].sort((a, b) => a.actualRank - b.actualRank);

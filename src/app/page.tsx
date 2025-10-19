@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 import DraggablePostDisplay from "./components/DraggablePostDisplay";
 import ResultsDisplay from "./components/ResultsDisplay";
