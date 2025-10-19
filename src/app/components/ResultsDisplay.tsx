@@ -104,20 +104,6 @@ const ResultsDisplay = ({ score, resultsData, keyInsight }: ResultsDisplayProps)
         marginBottom: "var(--space-8)",
         textAlign: "center"
       }}>
-        <p
-          style={{
-            fontSize: "var(--text-base)",
-            color: "var(--color-secondary)",
-            lineHeight: "1.6",
-            margin: 0,
-            marginBottom: "var(--space-6)",
-            maxWidth: "800px",
-            marginLeft: "auto",
-            marginRight: "auto"
-          }}
-        >
-          Wilson scoring considers statistical certainty. Posts with similar approval rates but different vote totals rank differently due to confidence intervals.
-        </p>
 
         <div style={{
           display: "grid",
@@ -199,18 +185,7 @@ const ResultsDisplay = ({ score, resultsData, keyInsight }: ResultsDisplayProps)
             >
               💡 {keyInsight}
             </p>
-          ) : (
-            <p
-              style={{
-                fontSize: "var(--text-sm)",
-                color: "var(--color-warning-dark)",
-                lineHeight: "1.6",
-                margin: 0
-              }}
-            >
-              <strong>Example:</strong> A post with 9 upvotes and 1 downvote (90% approval) often ranks below 99 upvotes and 1 downvote (99% approval) because of statistical certainty differences.
-            </p>
-          )}
+          ) : null}
         </div>
       )}
     </div>
