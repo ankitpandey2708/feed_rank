@@ -4,7 +4,6 @@ import { calculateWilsonScore } from './scoring';
 
 interface ExampleSet {
   id: number;
-  description: string;
   posts: BasicPost[];
   keyInsight: string;
 }
