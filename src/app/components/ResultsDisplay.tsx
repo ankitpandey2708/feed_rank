@@ -5,7 +5,7 @@ interface ResultsDisplayProps {
   resultsData: PostResult[];
 }
 
-const ResultsDisplay = ({ score, resultsData }: ResultsDisplayProps) => {
+const ResultsDisplay = ({ score, resultsData, keyInsight }: ResultsDisplayProps & { keyInsight?: string }) => {
   // Sort data for each column
   const userOrder = [...resultsData].sort((a, b) => a.userRank - b.userRank);
   const correctOrder = [...resultsData].sort((a, b) => a.actualRank - b.actualRank);
@@ -94,7 +94,7 @@ const ResultsDisplay = ({ score, resultsData }: ResultsDisplayProps) => {
             color: "var(--foreground)"
           }}
         >
-          Your Score: {score} / 5
+          Your Score: {score} / 3
         </h2>
       </div>
 
@@ -176,7 +176,7 @@ const ResultsDisplay = ({ score, resultsData }: ResultsDisplayProps) => {
       </div>
 
       {/* Educational Content */}
-      {score < 5 && (
+      {score < 3 && (
         <div style={{
           textAlign: "center",
           backgroundColor: "var(--color-warning-light)",

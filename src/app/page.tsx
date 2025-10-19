@@ -10,6 +10,7 @@ export default function Home() {
     isSubmitted,
     score,
     isValidRanks,
+    currentKeyInsight,
     handleSubmit,
     handleRestart,
     handleDragEnd
@@ -74,6 +75,7 @@ export default function Home() {
               actualRank: post.actualRank,
               userRank: idx + 1,
             }))}
+            keyInsight={currentKeyInsight}
           />
 
           <div className="text-center mt-6">

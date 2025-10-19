@@ -1,50 +1,25 @@
 import { useState, useEffect } from 'react';
 import { Post } from '@/types';
-import { calculateWilsonScore } from '../../utils/scoring';
+import { getRandomExampleSet, generatePostsFromExample } from '../../utils/curatedExamples';
 
 export function useFeedRankGame() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [score, setScore] = useState<number | null>(null);
+  const [currentKeyInsight, setCurrentKeyInsight] = useState<string>("");
 
-  const generateRandomPosts = (): Post[] => {
-    const posts = Array.from({ length: 5 }, (_, idx) => {
-      const upvotes = Math.floor(Math.random() * 100);
-      const downvotes = Math.floor(Math.random() * 100);
-      return {
-        id: idx + 1,
-        upvotes,
-        downvotes,
-        wilsonScore: 0,
-        actualRank: 0,
-      };
-    });
-
-    // Calculate Wilson scores
-    posts.forEach((post) => {
-      post.wilsonScore = calculateWilsonScore(post.upvotes, post.downvotes);
-    });
-
-    // Rank posts by Wilson score (descending)
-    const sorted = [...posts].sort((a, b) => b.wilsonScore - a.wilsonScore);
-    sorted.forEach((post, idx) => {
-      post.actualRank = idx + 1;
-    });
-
-    // Assign actualRank back to original posts
-    posts.forEach((post) => {
-      post.actualRank = sorted.find((p) => p.id === post.id)?.actualRank || 0;
-    });
-
-    return posts;
+  const generateCuratedPosts = (): Post[] => {
+    const exampleSet = getRandomExampleSet();
+    setCurrentKeyInsight(exampleSet.keyInsight);
+    return generatePostsFromExample(exampleSet);
   };
 
   // Initialize posts on mount
   useEffect(() => {
-    setPosts(generateRandomPosts());
+    setPosts(generateCuratedPosts());
   }, []);
 
-  const isValidRanks = () => posts.length === 5;
+  const isValidRanks = () => posts.length === 3;
 
   const handleSubmit = () => {
     let s = 0;
@@ -56,7 +31,7 @@ export function useFeedRankGame() {
   };
 
   const handleRestart = () => {
-    setPosts(generateRandomPosts());
+    setPosts(generateCuratedPosts());
     setIsSubmitted(false);
     setScore(null);
   };
@@ -75,6 +50,7 @@ export function useFeedRankGame() {
     isSubmitted,
     score,
     isValidRanks: isValidRanks(),
+    currentKeyInsight,
     handleSubmit,
     handleRestart,
     handleDragEnd,
