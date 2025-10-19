@@ -3,9 +3,11 @@ import { PostResult } from '@/types';
 interface ResultsDisplayProps {
   score: number;
   resultsData: PostResult[];
+  description?: string;
+  keyInsight?: string;
 }
 
-const ResultsDisplay = ({ score, resultsData, keyInsight }: ResultsDisplayProps & { keyInsight?: string }) => {
+const ResultsDisplay = ({ score, resultsData, description, keyInsight }: ResultsDisplayProps) => {
   // Sort data for each column
   const userOrder = [...resultsData].sort((a, b) => a.userRank - b.userRank);
   const correctOrder = [...resultsData].sort((a, b) => a.actualRank - b.actualRank);
@@ -90,12 +92,26 @@ const ResultsDisplay = ({ score, resultsData, keyInsight }: ResultsDisplayProps 
             fontSize: "var(--text-2xl)",
             fontWeight: "600",
             margin: 0,
-            marginBottom: "var(--space-2)",
+            marginBottom: description ? "var(--space-1)" : "var(--space-2)",
             color: "var(--foreground)"
           }}
         >
           Your Score: {score} / 3
         </h2>
+        {description && (
+          <p
+            style={{
+              fontSize: "var(--text-base)",
+              color: "var(--color-secondary)",
+              lineHeight: "1.5",
+              margin: 0,
+              marginBottom: "var(--space-2)",
+              fontStyle: "italic"
+            }}
+          >
+            {description}
+          </p>
+        )}
       </div>
 
       {/* Mathematical Explanation */}
@@ -186,37 +202,30 @@ const ResultsDisplay = ({ score, resultsData, keyInsight }: ResultsDisplayProps 
           maxWidth: "600px",
           margin: "0 auto"
         }}>
-          <h4
-            style={{
-              fontSize: "var(--text-lg)",
-              fontWeight: "600",
-              marginBottom: "var(--space-3)",
-              color: "var(--color-warning-dark)"
-            }}
-          >
-            Why the Difference?
-          </h4>
-          <p
-            style={{
-              fontSize: "var(--text-base)",
-              color: "var(--color-warning-dark)",
-              lineHeight: "1.6",
-              margin: 0,
-              marginBottom: "var(--space-2)"
-            }}
-          >
-            Wilson scoring prevents highly-rated posts from dominating purely due to having more votes.
-          </p>
-          <p
-            style={{
-              fontSize: "var(--text-sm)",
-              color: "var(--color-warning-dark)",
-              lineHeight: "1.6",
-              margin: 0
-            }}
-          >
-            <strong>Example:</strong> A post with 9 upvotes and 1 downvote (90% approval) often ranks below 99 upvotes and 1 downvote (99% approval) because of statistical certainty differences.
-          </p>
+          {keyInsight ? (
+            <p
+              style={{
+                fontSize: "var(--text-sm)",
+                color: "var(--color-warning-dark)",
+                lineHeight: "1.6",
+                margin: 0,
+                fontStyle: "italic"
+              }}
+            >
+              💡 {keyInsight}
+            </p>
+          ) : (
+            <p
+              style={{
+                fontSize: "var(--text-sm)",
+                color: "var(--color-warning-dark)",
+                lineHeight: "1.6",
+                margin: 0
+              }}
+            >
+              <strong>Example:</strong> A post with 9 upvotes and 1 downvote (90% approval) often ranks below 99 upvotes and 1 downvote (99% approval) because of statistical certainty differences.
+            </p>
+          )}
         </div>
       )}
     </div>

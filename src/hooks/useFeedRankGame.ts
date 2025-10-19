@@ -7,10 +7,12 @@ export function useFeedRankGame() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [score, setScore] = useState<number | null>(null);
   const [currentKeyInsight, setCurrentKeyInsight] = useState<string>("");
+  const [currentDescription, setCurrentDescription] = useState<string>("");
 
   const generateCuratedPosts = (): Post[] => {
     const exampleSet = getRandomExampleSet();
     setCurrentKeyInsight(exampleSet.keyInsight);
+    setCurrentDescription(exampleSet.description);
     return generatePostsFromExample(exampleSet);
   };
 
@@ -34,6 +36,8 @@ export function useFeedRankGame() {
     setPosts(generateCuratedPosts());
     setIsSubmitted(false);
     setScore(null);
+    setCurrentKeyInsight("");
+    setCurrentDescription("");
   };
 
   const handleDragEnd = (result: any) => {
@@ -51,6 +55,7 @@ export function useFeedRankGame() {
     score,
     isValidRanks: isValidRanks(),
     currentKeyInsight,
+    currentDescription,
     handleSubmit,
     handleRestart,
     handleDragEnd,

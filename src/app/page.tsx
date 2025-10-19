@@ -11,6 +11,7 @@ export default function Home() {
     score,
     isValidRanks,
     currentKeyInsight,
+    currentDescription,
     handleSubmit,
     handleRestart,
     handleDragEnd
@@ -75,6 +76,7 @@ export default function Home() {
               actualRank: post.actualRank,
               userRank: idx + 1,
             }))}
+            description={currentDescription}
             keyInsight={currentKeyInsight}
           />
 
