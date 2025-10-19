@@ -1,12 +1,9 @@
 import React from "react";
 import { Draggable } from "@hello-pangea/dnd";
+import { BasicPost } from "@/types";
 
 interface DraggablePostDisplayProps {
-  post: {
-    id: number;
-    upvotes: number;
-    downvotes: number;
-  };
+  post: BasicPost;
   index: number;
 }
 

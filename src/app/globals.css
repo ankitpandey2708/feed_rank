@@ -13,9 +13,7 @@
   --space-2: 8px;   /* sm */
   --space-3: 12px;  /* md */
   --space-4: 16px;  /* lg */
-  --space-5: 20px;  /* xl */
   --space-6: 24px;  /* 2xl */
-  --space-7: 32px;  /* 3xl */
   --space-8: 40px;  /* 4xl */
 
   /* Typography Scale */
@@ -40,24 +38,15 @@
   --color-success-light: #10b981; /* Emerald-500 */
   --color-warning: #d97706;       /* Amber-600 */
   --color-warning-light: #f59e0b; /* Amber-500 */
-  --color-error: #dc2626;         /* Red-600 */
   --color-error-light: #ef4444;   /* Red-500 */
 
   /* Neutral Grays - Limited palette */
-  --color-gray-50: #f9fafb;
-  --color-gray-100: #f3f4f6;
   --color-gray-200: #e5e7eb;
   --color-gray-300: #d1d5db;
-  --color-gray-400: #9ca3af;
   --color-gray-500: #6b7280;
-  --color-gray-600: #4b5563;
-  --color-gray-700: #374151;
-  --color-gray-800: #1f2937;
-  --color-gray-900: #111827;
 
   /* Warning text colors */
   --color-warning-dark: #78350f;   /* Dark amber text */
-  --color-error-dark: #7f1d1d;     /* Dark red text */
 
   /* Shadow Scale */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);

@@ -1,72 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 import DraggablePostDisplay from "./components/DraggablePostDisplay";
 import ResultsDisplay from "./components/ResultsDisplay";
-import { calculateWilsonScore } from "../../utils/scoring";
-
-interface Post {
-  id: number;
-  upvotes: number;
-  downvotes: number;
-  wilsonScore: number;
-  actualRank: number;
-}
-
-function generateRandomPosts(): Post[] {
-  const posts = Array.from({ length: 5 }, (_, idx) => {
-    const upvotes = Math.floor(Math.random() * 100);
-    const downvotes = Math.floor(Math.random() * 100);
-    return {
-      id: idx + 1,
-      upvotes,
-      downvotes,
-      wilsonScore: 0,
-      actualRank: 0,
-    };
-  });
-  // Calculate Wilson scores
-  posts.forEach((post) => {
-    post.wilsonScore = calculateWilsonScore(post.upvotes, post.downvotes);
-  });
-  // Rank posts by Wilson score (descending)
-  const sorted = [...posts].sort((a, b) => b.wilsonScore - a.wilsonScore);
-  sorted.forEach((post, idx) => {
-    post.actualRank = idx + 1;
-  });
-  // Assign actualRank back to original posts
-  posts.forEach((post) => {
-    post.actualRank = sorted.find((p) => p.id === post.id)?.actualRank || 0;
-  });
-  return posts;
-}
+import { useFeedRankGame } from "@/hooks/useFeedRankGame";
 
 export default function Home() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  React.useEffect(() => {
-    setPosts(generateRandomPosts());
-  }, []);
-
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [score, setScore] = useState<number | null>(null);
-
-  // Drag-and-drop always produces a valid order of 5 unique ranks
-  const isValidRanks = () => posts.length === 5;
-
-  const handleSubmit = () => {
-    let s = 0;
-    posts.forEach((post, idx) => {
-      if (idx + 1 === post.actualRank) s++;
-    });
-    setScore(s);
-    setIsSubmitted(true);
-  };
-
-  const handleRestart = () => {
-    setPosts(generateRandomPosts());
-    setIsSubmitted(false);
-    setScore(null);
-  };
+  const {
+    posts,
+    isSubmitted,
+    score,
+    isValidRanks,
+    handleSubmit,
+    handleRestart,
+    handleDragEnd
+  } = useFeedRankGame();
 
   return (
     <div className="flex flex-col items-center pt-8 px-4">
@@ -82,14 +30,7 @@ export default function Home() {
             </p>
 
             <div className="mb-4">
-              <DragDropContext
-                onDragEnd={(result) => {
-                  if (!result.destination) return;
-                  const reordered = Array.from(posts);
-                  const [removed] = reordered.splice(result.source.index, 1);
-                  reordered.splice(result.destination.index, 0, removed);
-                  setPosts(reordered);
-                }}
+              <DragDropContext onDragEnd={handleDragEnd}
               >
                 <Droppable droppableId="posts-droppable">
                   {(provided) => (
@@ -108,13 +49,13 @@ export default function Home() {
           <div className="text-center">
             <button
               className={`px-6 py-3 rounded-lg border-2 font-medium transition-all outline-none ${
-                isValidRanks()
+                isValidRanks
                   ? "bg-[var(--color-success)] text-white border-transparent hover:border-white cursor-pointer hover:bg-[var(--color-success-dark, #047857)] focus:ring-2 focus:ring-[var(--color-success-light)] focus:ring-offset-2"
                   : "bg-[var(--color-gray-300)] text-[var(--color-gray-500)] border-transparent cursor-not-allowed opacity-60"
               }`}
               onClick={handleSubmit}
-              disabled={!isValidRanks()}
-              aria-disabled={!isValidRanks()}
+              disabled={!isValidRanks}
+              aria-disabled={!isValidRanks}
             >
               Submit Ranking
             </button>

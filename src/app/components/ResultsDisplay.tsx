@@ -1,13 +1,5 @@
 import React from 'react';
-
-interface PostResult {
-  id: number;
-  upvotes: number;
-  downvotes: number;
-  wilsonScore: number;
-  actualRank: number;
-  userRank: number;
-}
+import { PostResult } from '@/types';
 
 interface ResultsDisplayProps {
   score: number;
@@ -105,16 +97,6 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ score, resultsData }) =
         >
           Your Score: {score} / 5
         </h2>
-        <p
-          style={{
-            fontSize: "var(--text-base)",
-            color: "var(--color-secondary)",
-            margin: 0,
-            lineHeight: "1.6"
-          }}
-        >
-          How well did your ranking match the mathematical truth?
-        </p>
       </div>
 
       {/* Mathematical Explanation */}
