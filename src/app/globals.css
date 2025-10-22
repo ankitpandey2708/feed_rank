@@ -76,10 +76,7 @@ body {
   font-size: var(--text-base);
 }
 
-/* Improve readability with max width for body text */
-p, .body-text {
-  max-width: 50ch; /* Approximately 75 characters at 16px font size */
-}
+
 
 /* Accessibility & Motion Preferences */
 @media (prefers-reduced-motion: reduce) {
