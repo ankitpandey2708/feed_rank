@@ -42,11 +42,7 @@ export interface GameSession {
   consecutiveCorrect: number;
 }
 
-export interface ScoreResult {
-  exactMatches: number;
-  totalScore: number;
-  maxScore: number;
-}
+
 
 export interface UserMistakes {
   prioritizedSmallSample: boolean;

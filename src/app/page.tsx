@@ -16,7 +16,6 @@ export default function Home() {
     posts,
     isSubmitted,
     score,
-    scoreResult,
     isValidRanks,
     currentKeyInsight,
     session,
@@ -161,7 +160,6 @@ export default function Home() {
         <div className="w-full max-w-6xl">
           <ResultsDisplay
             score={score ?? 0}
-            scoreResult={scoreResult}
             resultsData={posts.map((post, idx) => ({
               id: post.id,
               upvotes: post.upvotes,

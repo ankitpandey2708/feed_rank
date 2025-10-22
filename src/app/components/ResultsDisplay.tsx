@@ -1,8 +1,7 @@
-import { PostResult, UserMistakes, ScoreResult } from '@/types';
+import { PostResult, UserMistakes } from '@/types';
 
 interface ResultsDisplayProps {
   score: number;
-  scoreResult?: ScoreResult | null;
   resultsData: PostResult[];
   keyInsight?: string;
 }
@@ -54,7 +53,7 @@ function generatePersonalizedInsight(
   return keyInsight || "Good try! Keep practicing to understand how sample size affects ranking confidence.";
 }
 
-const ResultsDisplay = ({ score, scoreResult, resultsData, keyInsight }: ResultsDisplayProps) => {
+const ResultsDisplay = ({ score, resultsData, keyInsight }: ResultsDisplayProps) => {
   // Calculate percentage rankings
   const withPercentageRank = resultsData.map(post => {
     const total = post.upvotes + post.downvotes;
@@ -186,15 +185,6 @@ const ResultsDisplay = ({ score, scoreResult, resultsData, keyInsight }: Results
         >
           Your Score: {score} / 3
         </h2>
-        {scoreResult && (
-          <p style={{
-            fontSize: "var(--text-sm)",
-            color: "var(--color-secondary)",
-            margin: 0
-          }}>
-            Points: {scoreResult.totalScore} / {scoreResult.maxScore} (partial credit for close answers)
-          </p>
-        )}
       </div>
 
       {/* 3-Column Comparison */}

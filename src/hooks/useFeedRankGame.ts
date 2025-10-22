@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Post, GameSession, ScoreResult } from '@/types';
+import { Post, GameSession } from '@/types';
 import { getNextExampleSet, generatePostsFromExample } from '../../utils/curatedExamples';
 
 // Helper function to create new game session
@@ -15,29 +15,9 @@ function createNewSession(): GameSession {
   };
 }
 
-// Calculate enhanced score with partial credit
-function calculateScore(posts: Post[]): ScoreResult {
-  let exactMatches = 0;
-  let partialScore = 0;
-
-  posts.forEach((post, userIdx) => {
-    if (userIdx + 1 === post.actualRank) {
-      exactMatches++;
-      partialScore += 3; // Full points
-    } else {
-      // Partial credit for being close
-      const distance = Math.abs((userIdx + 1) - post.actualRank);
-      if (distance === 1) {
-        partialScore += 1; // One position off
-      }
-    }
-  });
-
-  return {
-    exactMatches,
-    totalScore: partialScore,
-    maxScore: posts.length * 3
-  };
+// Calculate exact matches only
+function calculateExactMatches(posts: Post[]): number {
+  return posts.filter((post, userIdx) => userIdx + 1 === post.actualRank).length;
 }
 
 // Get contextual hint based on current user ranking
@@ -89,7 +69,7 @@ function provideLiveValidation(posts: Post[]): string[] {
 export function useFeedRankGame() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [scoreResult, setScoreResult] = useState<ScoreResult | null>(null);
+  const [score, setScore] = useState<number | null>(null);
   const [currentKeyInsight, setCurrentKeyInsight] = useState<string>("");
   const [session, setSession] = useState<GameSession>(createNewSession());
   const [hintsEnabled, setHintsEnabled] = useState(true);
@@ -127,13 +107,13 @@ export function useFeedRankGame() {
   };
 
   const handleSubmit = () => {
-    const result = calculateScore(posts);
-    setScoreResult(result);
+    const exactMatches = calculateExactMatches(posts);
+    setScore(exactMatches);
     setIsSubmitted(true);
     setCurrentHint(null); // Clear hints on submit
 
     // Update session
-    const isPerfect = result.exactMatches === 3;
+    const isPerfect = exactMatches === 3;
     setSession(prev => {
       const newConceptsLearned = new Set(prev.conceptsLearned);
       if (isPerfect) {
@@ -144,7 +124,7 @@ export function useFeedRankGame() {
       return {
         ...prev,
         roundsPlayed: prev.roundsPlayed + 1,
-        totalScore: prev.totalScore + result.exactMatches,
+        totalScore: prev.totalScore + exactMatches,
         maxPossibleScore: prev.maxPossibleScore + 3,
         streak: isPerfect ? prev.streak + 1 : 0,
         consecutiveCorrect: isPerfect ? prev.consecutiveCorrect + 1 : 0,
@@ -156,7 +136,7 @@ export function useFeedRankGame() {
   const handleRestart = () => {
     setPosts(generateCuratedPosts());
     setIsSubmitted(false);
-    setScoreResult(null);
+    setScore(null);
     setCurrentHint(null);
     setValidationIssues([]);
   };
@@ -180,8 +160,7 @@ export function useFeedRankGame() {
   return {
     posts,
     isSubmitted,
-    score: scoreResult?.exactMatches ?? null,
-    scoreResult,
+    score,
     isValidRanks: isValidRanks(),
     currentKeyInsight,
     session,
