@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import "../../file.css";
 
 const interFont = Inter({
   variable: "--font-inter",
@@ -23,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-beautify="auto strong">
       <body
         className={`${interFont.variable} ${jetbrainsMono.variable} antialiased min-h-screen`}
         style={{
