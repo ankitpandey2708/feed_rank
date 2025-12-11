@@ -12,84 +12,40 @@ const SessionDisplay = ({ session }: SessionDisplayProps) => {
     : 0;
 
   return (
-    <div style={{
-      backgroundColor: "var(--background)",
-      border: "1px solid var(--color-gray-200)",
-      borderRadius: "var(--radius-lg)",
-      padding: "var(--space-4)",
-      marginBottom: "var(--space-6)",
-      boxShadow: "var(--shadow-sm)"
-    }}>
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
-        gap: "var(--space-4)",
-        textAlign: "center"
-      }}>
+    <div className="bg-white border border-neutral-200/60 rounded-xl p-6 mb-8 shadow-md hover:shadow-lg transition-all duration-300">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
         <div>
-          <div style={{
-            fontSize: "var(--text-2xl)",
-            fontWeight: "700",
-            color: "var(--color-primary)"
-          }}>
+          <div className="text-4xl font-bold text-primary-500 mb-1">
             {session.roundsPlayed}
           </div>
-          <div style={{
-            fontSize: "var(--text-xs)",
-            color: "var(--color-secondary)",
-            marginTop: "var(--space-1)"
-          }}>
+          <div className="text-xs font-medium text-neutral-500 uppercase tracking-wide">
             Rounds
           </div>
         </div>
 
         <div>
-          <div style={{
-            fontSize: "var(--text-2xl)",
-            fontWeight: "700",
-            color: "var(--color-success)"
-          }}>
+          <div className="text-4xl font-bold text-success-500 mb-1">
             {successRate}%
           </div>
-          <div style={{
-            fontSize: "var(--text-xs)",
-            color: "var(--color-secondary)",
-            marginTop: "var(--space-1)"
-          }}>
+          <div className="text-xs font-medium text-neutral-500 uppercase tracking-wide">
             Success
           </div>
         </div>
 
         <div>
-          <div style={{
-            fontSize: "var(--text-2xl)",
-            fontWeight: "700",
-            color: "var(--color-warning)"
-          }}>
+          <div className="text-4xl font-bold text-warning-500 mb-1">
             {session.streak}
           </div>
-          <div style={{
-            fontSize: "var(--text-xs)",
-            color: "var(--color-secondary)",
-            marginTop: "var(--space-1)"
-          }}>
+          <div className="text-xs font-medium text-neutral-500 uppercase tracking-wide">
             Streak
           </div>
         </div>
 
         <div>
-          <div style={{
-            fontSize: "var(--text-2xl)",
-            fontWeight: "700",
-            color: "var(--foreground)"
-          }}>
+          <div className="text-4xl font-bold text-neutral-900 mb-1">
             {session.totalScore}/{session.maxPossibleScore}
           </div>
-          <div style={{
-            fontSize: "var(--text-xs)",
-            color: "var(--color-secondary)",
-            marginTop: "var(--space-1)"
-          }}>
+          <div className="text-xs font-medium text-neutral-500 uppercase tracking-wide">
             Total Score
           </div>
         </div>

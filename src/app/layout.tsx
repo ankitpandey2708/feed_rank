@@ -5,6 +5,8 @@ import "./globals.css";
 const interFont = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -25,21 +27,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${interFont.variable} ${jetbrainsMono.variable} antialiased min-h-screen`}
-        style={{
-          background: "var(--background)",
-          color: "var(--foreground)",
-          transition: "background 0.3s, color 0.3s",
-          padding: "var(--space-4)",
-          lineHeight: "1.5",
-          minHeight: "100vh"
-        }}
+        className={`${interFont.variable} ${jetbrainsMono.variable} ${interFont.className} antialiased min-h-screen bg-neutral-50`}
       >
         <a href="#main-content" className="skip-link">Skip to main content</a>
-        <main id="main-content" className="max-w-4xl mx-auto" style={{ paddingBottom: "var(--space-8)" }}>
+        <main id="main-content" className="max-w-4xl mx-auto px-4 py-8 pb-20">
           {children}
         </main>
-      
+
       </body>
     </html>
   );

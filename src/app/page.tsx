@@ -56,29 +56,21 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center pt-8 px-4 pb-12">
+    <div className="flex flex-col items-center">
       {/* Tutorial Modal */}
       {showTutorial && (
         <Tutorial onComplete={handleTutorialComplete} onSkip={handleTutorialSkip} />
       )}
 
       {/* Header with Tutorial Link */}
-      <div className="w-full max-w-4xl mb-4 flex justify-between items-center">
-        <h1 className="text-2xl font-semibold text-center flex-1">
+      <div className="w-full max-w-4xl mb-6 flex justify-between items-center">
+        <h1 className="text-3xl font-bold text-neutral-950 tracking-tight flex-1 text-center">
           Rank your Feed
         </h1>
         {tutorialCompleted && (
           <button
             onClick={handleShowTutorialAgain}
-            style={{
-              padding: "var(--space-2) var(--space-3)",
-              fontSize: "var(--text-sm)",
-              color: "var(--color-primary)",
-              backgroundColor: "transparent",
-              border: "1px solid var(--color-primary)",
-              borderRadius: "var(--radius-md)",
-              cursor: "pointer"
-            }}
+            className="px-4 py-2 text-sm font-medium text-primary-600 bg-transparent border border-primary-500/60 rounded-lg hover:bg-primary-50 hover:border-primary-500 transition-all duration-200 cursor-pointer"
           >
             ? Tutorial
           </button>
@@ -92,9 +84,9 @@ export default function Home() {
 
       {!isSubmitted ? (
         <div className="w-full max-w-2xl">
-          <div className="mb-6 p-6 bg-white border border-gray-300 rounded-lg shadow-sm">
-            <div className="mb-4 flex justify-center">
-              <p className="text-base text-gray-900 leading-relaxed text-center">
+          <div className="mb-6 p-8 bg-white border border-neutral-200/60 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+            <div className="mb-6 flex justify-center">
+              <p className="text-base text-neutral-700 leading-relaxed text-center max-w-prose">
                 Your users rate stuff on your site. You want to put the highest-rated stuff at the top and lowest-rated at the bottom. Drag the posts below to show how you think your feed should look.
               </p>
             </div>
@@ -124,32 +116,27 @@ export default function Home() {
           </div>
 
           {/* Submit Button and Hint Toggle */}
-          <div className="text-center space-y-3">
+          <div className="text-center space-y-4">
             <button
-              className={`px-6 py-3 rounded-lg border-2 font-medium transition-all outline-none ${
+              className={`group relative px-8 py-3.5 rounded-lg font-semibold text-base transition-all duration-200 outline-none ${
                 isValidRanks
-                  ? "bg-[var(--color-success)] text-white border-transparent hover:border-white cursor-pointer hover:bg-[var(--color-success-dark, #047857)] focus:ring-2 focus:ring-[var(--color-success-light)] focus:ring-offset-2"
-                  : "bg-[var(--color-gray-300)] text-[var(--color-gray-500)] border-transparent cursor-not-allowed opacity-60"
+                  ? "bg-gradient-to-b from-success-500 to-success-600 text-white shadow-md hover:shadow-lg hover:from-success-600 hover:to-success-700 cursor-pointer focus:ring-4 focus:ring-success-500/20"
+                  : "bg-neutral-300 text-neutral-500 cursor-not-allowed opacity-60"
               }`}
               onClick={handleSubmit}
               disabled={!isValidRanks}
               aria-disabled={!isValidRanks}
             >
-              Submit Ranking
+              <span className="relative z-10">Submit Ranking</span>
+              {isValidRanks && (
+                <div className="absolute inset-0 rounded-lg bg-white opacity-0 group-hover:opacity-10 transition-opacity" />
+              )}
             </button>
 
             <div>
               <button
                 onClick={toggleHints}
-                style={{
-                  padding: "var(--space-2) var(--space-4)",
-                  fontSize: "var(--text-xs)",
-                  color: "var(--color-secondary)",
-                  backgroundColor: "transparent",
-                  border: "none",
-                  cursor: "pointer",
-                  textDecoration: "underline"
-                }}
+                className="px-4 py-2 text-sm font-medium text-neutral-600 hover:text-neutral-900 bg-transparent border-none cursor-pointer underline hover:no-underline transition-all duration-150"
               >
                 {hintsEnabled ? "Disable Hints" : "Enable Hints"}
               </button>
@@ -171,19 +158,13 @@ export default function Home() {
             keyInsight={currentKeyInsight}
           />
 
-          <div className="text-center mt-6">
+          <div className="text-center mt-8">
             <button
-              className="bg-[var(--color-primary)] text-white rounded-lg border-2 border-transparent font-medium cursor-pointer transition-all outline-none hover:bg-[var(--color-primary-dark)] hover:border-white focus:ring-2 focus:ring-[var(--color-primary-light)] focus:ring-offset-2"
+              className="group relative px-8 py-3.5 bg-gradient-to-b from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-semibold text-base rounded-lg shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer focus:ring-4 focus:ring-primary-500/20 outline-none"
               onClick={handleRestart}
-              style={{
-                padding: "var(--button-padding-y) var(--button-padding-x)",
-                height: "var(--button-height)",
-                borderRadius: "var(--button-border-radius)",
-                fontWeight: "var(--button-font-weight)",
-                transition: "var(--transition-normal)"
-              }}
             >
-              Play Again
+              <span className="relative z-10">Play Again</span>
+              <div className="absolute inset-0 rounded-lg bg-white opacity-0 group-hover:opacity-10 transition-opacity" />
             </button>
           </div>
         </div>
