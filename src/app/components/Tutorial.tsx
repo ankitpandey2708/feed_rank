@@ -73,134 +73,55 @@ const Tutorial = ({ onComplete, onSkip }: TutorialProps) => {
   };
 
   return (
-    <div style={{
-      position: "fixed",
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: "rgba(0, 0, 0, 0.7)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      zIndex: 1000,
-      padding: "var(--space-4)"
-    }}>
-      <div style={{
-        backgroundColor: "var(--background)",
-        borderRadius: "var(--radius-lg)",
-        padding: "var(--space-8)",
-        maxWidth: "600px",
-        width: "100%",
-        boxShadow: "var(--shadow-lg)"
-      }}>
-        {/* Progress indicator */}
-        <div style={{
-          display: "flex",
-          gap: "var(--space-2)",
-          marginBottom: "var(--space-6)",
-          justifyContent: "center"
-        }}>
+    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-xl p-10 max-w-2xl w-full shadow-xl">
+        {/* Premium Progress indicator */}
+        <div className="flex gap-2 mb-8 justify-center">
           {tutorialSteps.map((_, idx) => (
             <div
               key={idx}
-              style={{
-                width: "12px",
-                height: "12px",
-                borderRadius: "50%",
-                backgroundColor: idx === currentStep
-                  ? "var(--color-primary)"
-                  : "var(--color-gray-300)",
-                transition: "all 0.3s ease"
-              }}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                idx === currentStep
+                  ? 'w-8 bg-primary-500'
+                  : 'w-2 bg-neutral-300'
+              }`}
             />
           ))}
         </div>
 
-        {/* Content */}
-        <h2 style={{
-          fontSize: "var(--text-2xl)",
-          fontWeight: "700",
-          marginBottom: "var(--space-4)",
-          color: "var(--foreground)",
-          textAlign: "center"
-        }}>
+        {/* Premium Content */}
+        <h2 className="text-3xl font-bold text-neutral-950 mb-4 text-center tracking-tight">
           {step.title}
         </h2>
 
-        <p style={{
-          fontSize: "var(--text-base)",
-          lineHeight: "1.6",
-          color: "var(--color-secondary)",
-          marginBottom: step.example ? "var(--space-6)" : "var(--space-8)"
-        }}>
+        <p className={`text-base leading-relaxed text-neutral-700 ${step.example ? 'mb-6' : 'mb-8'}`}>
           {step.content}
         </p>
 
-        {/* Example */}
+        {/* Premium Example */}
         {step.example && (
-          <div style={{
-            backgroundColor: "var(--color-gray-100)",
-            borderRadius: "var(--radius-md)",
-            padding: "var(--space-4)",
-            marginBottom: "var(--space-6)"
-          }}>
-            <div style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "var(--space-2)",
-              marginBottom: "var(--space-3)"
-            }}>
-              <div style={{
-                padding: "var(--space-2)",
-                backgroundColor: "var(--background)",
-                borderRadius: "var(--radius-sm)",
-                fontSize: "var(--text-sm)",
-                fontFamily: "monospace"
-              }}>
+          <div className="bg-neutral-100 rounded-xl p-5 mb-6">
+            <div className="flex flex-col gap-3 mb-4">
+              <div className="p-3 bg-white rounded-lg text-sm font-mono shadow-sm">
                 {step.example.post1}
               </div>
-              <div style={{
-                padding: "var(--space-2)",
-                backgroundColor: "var(--background)",
-                borderRadius: "var(--radius-sm)",
-                fontSize: "var(--text-sm)",
-                fontFamily: "monospace"
-              }}>
+              <div className="p-3 bg-white rounded-lg text-sm font-mono shadow-sm">
                 {step.example.post2}
               </div>
             </div>
-            <p style={{
-              fontSize: "var(--text-sm)",
-              color: "var(--color-secondary)",
-              fontStyle: "italic",
-              margin: 0
-            }}>
+            <p className="text-sm text-neutral-600 italic m-0">
               {step.example.explanation}
             </p>
           </div>
         )}
 
-        {/* Navigation buttons */}
-        <div style={{
-          display: "flex",
-          justifyContent: "space-between",
-          gap: "var(--space-4)"
-        }}>
-          <div style={{ display: "flex", gap: "var(--space-2)" }}>
+        {/* Premium Navigation buttons */}
+        <div className="flex justify-between gap-4">
+          <div className="flex gap-3">
             {currentStep > 0 && (
               <button
                 onClick={handlePrev}
-                style={{
-                  padding: "var(--space-3) var(--space-5)",
-                  backgroundColor: "var(--background)",
-                  color: "var(--foreground)",
-                  border: "1px solid var(--color-gray-300)",
-                  borderRadius: "var(--radius-md)",
-                  cursor: "pointer",
-                  fontSize: "var(--text-sm)",
-                  fontWeight: "600"
-                }}
+                className="px-5 py-3 bg-white text-neutral-900 border border-neutral-300 rounded-lg hover:bg-neutral-50 hover:border-neutral-400 cursor-pointer text-sm font-semibold transition-all duration-200 shadow-sm hover:shadow-md"
               >
                 ← Previous
               </button>
@@ -208,15 +129,7 @@ const Tutorial = ({ onComplete, onSkip }: TutorialProps) => {
             {!isLastStep && (
               <button
                 onClick={onSkip}
-                style={{
-                  padding: "var(--space-3) var(--space-5)",
-                  backgroundColor: "transparent",
-                  color: "var(--color-secondary)",
-                  border: "none",
-                  cursor: "pointer",
-                  fontSize: "var(--text-sm)",
-                  fontWeight: "500"
-                }}
+                className="px-5 py-3 bg-transparent text-neutral-600 hover:text-neutral-900 border-none cursor-pointer text-sm font-medium transition-colors"
               >
                 Skip Tutorial
               </button>
@@ -224,18 +137,10 @@ const Tutorial = ({ onComplete, onSkip }: TutorialProps) => {
           </div>
           <button
             onClick={handleNext}
-            style={{
-              padding: "var(--space-3) var(--space-6)",
-              backgroundColor: "var(--color-primary)",
-              color: "white",
-              border: "none",
-              borderRadius: "var(--radius-md)",
-              cursor: "pointer",
-              fontSize: "var(--text-sm)",
-              fontWeight: "600"
-            }}
+            className="group relative px-8 py-3 bg-gradient-to-b from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white rounded-lg cursor-pointer text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200"
           >
-            {isLastStep ? "Start Playing!" : "Next →"}
+            <span className="relative z-10">{isLastStep ? "Start Playing!" : "Next →"}</span>
+            <div className="absolute inset-0 rounded-lg bg-white opacity-0 group-hover:opacity-10 transition-opacity" />
           </button>
         </div>
       </div>

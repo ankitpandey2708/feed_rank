@@ -81,7 +81,7 @@ const ResultsDisplay = ({ score, resultsData, keyInsight }: ResultsDisplayProps)
   const correctOrder = [...withPercentageRank].sort((a, b) => a.actualRank - b.actualRank);
   const percentageRanked = [...withPercentageRank].sort((a, b) => (a.percentageRank || 0) - (b.percentageRank || 0));
 
-  // Consistent Card component
+  // Premium Card component
   const Card = ({
     post,
     showScore,
@@ -95,64 +95,20 @@ const ResultsDisplay = ({ score, resultsData, keyInsight }: ResultsDisplayProps)
     const percentage = total > 0 ? ((post.upvotes / total) * 100).toFixed(1) : '0.0';
 
     return (
-      <div
-        style={{
-          padding: "var(--space-4)",
-          backgroundColor: "var(--background)",
-          border: "1px solid var(--color-gray-200)",
-          borderRadius: "var(--radius-md)",
-          boxShadow: "var(--shadow-sm)",
-          transition: "all 0.2s ease",
-          minHeight: "100px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          color: "var(--foreground)",
-        }}
-      >
-        <div
-          style={{
-            fontSize: "var(--text-lg)",
-            fontWeight: "600",
-            lineHeight: "1.4",
-            marginBottom: "var(--space-2)"
-          }}
-        >
+      <div className="bg-white border border-neutral-200/60 rounded-xl p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 min-h-[100px] flex flex-col items-center justify-center text-center">
+        <div className="text-lg font-semibold text-neutral-900 mb-2">
           Post #{post.id}
         </div>
-        <div
-          style={{
-            fontSize: "var(--text-sm)",
-            color: "var(--color-secondary)",
-            lineHeight: "1.5",
-            marginBottom: "var(--space-1)"
-          }}
-        >
+        <div className="text-sm text-neutral-600 mb-1">
           ↑ {post.upvotes} ↓ {post.downvotes}
         </div>
         {showScore && scoreType === 'wilson' && (
-          <div
-            style={{
-              fontSize: "var(--text-xs)",
-              color: "var(--color-primary-light)",
-              fontWeight: "600",
-              fontFamily: "monospace",
-            }}
-          >
+          <div className="text-xs text-primary-600 font-semibold font-mono">
             Wilson: {post.wilsonScore.toFixed(4)}
           </div>
         )}
         {showScore && scoreType === 'percentage' && (
-          <div
-            style={{
-              fontSize: "var(--text-xs)",
-              color: "var(--color-warning)",
-              fontWeight: "600",
-              fontFamily: "monospace",
-            }}
-          >
+          <div className="text-xs text-warning-600 font-semibold font-mono">
             {percentage}% ({total} votes)
           </div>
         )}
@@ -163,56 +119,27 @@ const ResultsDisplay = ({ score, resultsData, keyInsight }: ResultsDisplayProps)
   const personalizedInsight = generatePersonalizedInsight(resultsData, keyInsight);
 
   return (
-    <div style={{ marginTop: "var(--space-6)" }}>
-      {/* Score Display */}
-      <div style={{
-        textAlign: "center",
-        marginBottom: "var(--space-8)",
-        padding: "var(--space-6)",
-        backgroundColor: "var(--background)",
-        border: "1px solid var(--color-gray-200)",
-        borderRadius: "var(--radius-lg)",
-        boxShadow: "var(--shadow-sm)"
-      }}>
-        <h2
-          style={{
-            fontSize: "var(--text-2xl)",
-            fontWeight: "600",
-            margin: 0,
-            marginBottom: "var(--space-2)",
-            color: "var(--foreground)"
-          }}
-        >
-          Your Score: {score} / 3
+    <div className="mt-8">
+      {/* Premium Score Display */}
+      <div className="text-center mb-12 p-8 bg-white border border-neutral-200/60 rounded-xl shadow-md">
+        <p className="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-2">
+          Your Score
+        </p>
+        <h2 className="text-5xl font-bold text-neutral-950 tracking-tight">
+          {score} <span className="text-neutral-400">/</span> 3
         </h2>
       </div>
 
-      {/* 3-Column Comparison */}
-      <div style={{
-        marginBottom: "var(--space-8)",
-        textAlign: "center"
-      }}>
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-          gap: "var(--space-4)",
-          maxWidth: "1200px",
-          margin: "0 auto",
-          alignItems: "start"
-        }}>
+      {/* Premium 3-Column Comparison */}
+      <div className="mb-12 text-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[1200px] mx-auto items-start">
           {/* User's Ranking */}
           <div>
-            <h3
-              style={{
-                fontSize: "var(--text-lg)",
-                fontWeight: "600",
-                marginBottom: "var(--space-4)",
-                color: "var(--foreground)"
-              }}
-            >
+            <h3 className="text-xl font-semibold text-neutral-900 mb-1 tracking-tight">
               Your Ranking
             </h3>
-            <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
+            <p className="text-xs text-neutral-500 mb-4">Your guess</p>
+            <div className="flex flex-col gap-3">
               {userOrder.map(post => (
                 <Card key={post.id} post={post} showScore={false} scoreType="none" />
               ))}
@@ -221,25 +148,11 @@ const ResultsDisplay = ({ score, resultsData, keyInsight }: ResultsDisplayProps)
 
           {/* Percentage-Based (Wrong Way) */}
           <div>
-            <h3
-              style={{
-                fontSize: "var(--text-lg)",
-                fontWeight: "600",
-                marginBottom: "var(--space-4)",
-                color: "var(--color-warning)"
-              }}
-            >
+            <h3 className="text-xl font-semibold text-warning-600 mb-1 tracking-tight">
               Percentage-Based ❌
             </h3>
-            <p style={{
-              fontSize: "var(--text-xs)",
-              color: "var(--color-secondary)",
-              marginBottom: "var(--space-2)",
-              marginTop: "calc(var(--space-2) * -1)"
-            }}>
-              (The naive approach)
-            </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
+            <p className="text-xs text-neutral-500 mb-4">The naive approach</p>
+            <div className="flex flex-col gap-3">
               {percentageRanked.map(post => (
                 <Card key={post.id} post={post} showScore={true} scoreType="percentage" />
               ))}
@@ -248,36 +161,18 @@ const ResultsDisplay = ({ score, resultsData, keyInsight }: ResultsDisplayProps)
 
           {/* Wilson Score (Correct Way) */}
           <div>
-            <h3
-              style={{
-                fontSize: "var(--text-lg)",
-                fontWeight: "600",
-                marginBottom: "var(--space-4)",
-                color: "var(--color-success)"
-              }}
-            >
+            <h3 className="text-xl font-semibold text-success-600 mb-1 tracking-tight">
               <a
                 href="https://www.evanmiller.org/how-not-to-sort-by-average-rating.html"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{
-                  color: "inherit",
-                  textDecoration: "underline",
-                  fontSize: "inherit"
-                }}
+                className="hover:text-success-700 underline transition-colors"
               >
                 Wilson Score ✓
               </a>
             </h3>
-            <p style={{
-              fontSize: "var(--text-xs)",
-              color: "var(--color-secondary)",
-              marginBottom: "var(--space-2)",
-              marginTop: "calc(var(--space-2) * -1)"
-            }}>
-              (Statistical confidence)
-            </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
+            <p className="text-xs text-neutral-500 mb-4">Statistical confidence</p>
+            <div className="flex flex-col gap-3">
               {correctOrder.map(post => (
                 <Card key={post.id} post={post} showScore={true} scoreType="wilson" />
               ))}
@@ -286,25 +181,15 @@ const ResultsDisplay = ({ score, resultsData, keyInsight }: ResultsDisplayProps)
         </div>
       </div>
 
-      {/* Educational Content - Personalized Insights */}
-      <div style={{
-        textAlign: "center",
-        backgroundColor: score === 3 ? "var(--color-success-light)" : "var(--color-warning-light)",
-        padding: "var(--space-6)",
-        borderRadius: "var(--radius-lg)",
-        border: `1px solid ${score === 3 ? "var(--color-success)" : "var(--color-warning)"}`,
-        maxWidth: "700px",
-        margin: "0 auto"
-      }}>
-        <p
-          style={{
-            fontSize: "var(--text-sm)",
-            color: score === 3 ? "var(--color-success-dark)" : "var(--color-warning-dark)",
-            lineHeight: "1.6",
-            margin: 0,
-            fontStyle: "italic"
-          }}
-        >
+      {/* Premium Educational Insight */}
+      <div className={`text-center p-6 rounded-xl border max-w-2xl mx-auto shadow-sm ${
+        score === 3
+          ? 'bg-success-50 border-success-500/60'
+          : 'bg-warning-50 border-warning-500/60'
+      }`}>
+        <p className={`text-sm leading-relaxed m-0 italic ${
+          score === 3 ? 'text-success-800' : 'text-warning-800'
+        }`}>
           {score === 3 ? "🎉 Perfect! " : "💡 "}{personalizedInsight}
         </p>
       </div>

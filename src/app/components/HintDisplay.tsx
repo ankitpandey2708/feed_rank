@@ -9,23 +9,12 @@ const HintDisplay = ({ hint, validationIssues, onRequestHint, hintsEnabled }: Hi
   if (!hintsEnabled) return null;
 
   return (
-    <div style={{ marginTop: "var(--space-4)" }}>
+    <div className="mt-4 space-y-3">
       {/* Validation Issues */}
       {validationIssues.length > 0 && (
-        <div style={{
-          backgroundColor: "var(--color-warning-light)",
-          border: "1px solid var(--color-warning)",
-          borderRadius: "var(--radius-md)",
-          padding: "var(--space-3)",
-          marginBottom: "var(--space-3)"
-        }}>
+        <div className="bg-warning-50 border border-warning-500/60 rounded-lg p-4">
           {validationIssues.map((issue, idx) => (
-            <p key={idx} style={{
-              margin: 0,
-              fontSize: "var(--text-sm)",
-              color: "var(--color-warning-dark)",
-              lineHeight: "1.5"
-            }}>
+            <p key={idx} className="m-0 text-sm text-warning-800 leading-relaxed">
               ⚠️ {issue}
             </p>
           ))}
@@ -35,38 +24,15 @@ const HintDisplay = ({ hint, validationIssues, onRequestHint, hintsEnabled }: Hi
       {/* Hint Button */}
       <button
         onClick={onRequestHint}
-        className="text-sm"
-        style={{
-          padding: "var(--space-2) var(--space-4)",
-          backgroundColor: "var(--background)",
-          color: "var(--color-primary)",
-          border: "1px solid var(--color-primary)",
-          borderRadius: "var(--radius-md)",
-          cursor: "pointer",
-          fontSize: "var(--text-sm)",
-          fontWeight: "500",
-          transition: "all 0.2s ease"
-        }}
+        className="px-4 py-2.5 bg-white text-primary-600 border border-primary-500/60 rounded-lg hover:bg-primary-50 hover:border-primary-500 cursor-pointer text-sm font-medium transition-all duration-200 shadow-sm hover:shadow-md"
       >
         💡 Need a Hint?
       </button>
 
       {/* Display Hint */}
       {hint && (
-        <div style={{
-          marginTop: "var(--space-3)",
-          backgroundColor: "var(--color-primary-light)",
-          border: "1px solid var(--color-primary)",
-          borderRadius: "var(--radius-md)",
-          padding: "var(--space-4)"
-        }}>
-          <p style={{
-            margin: 0,
-            fontSize: "var(--text-sm)",
-            color: "var(--foreground)",
-            lineHeight: "1.6",
-            fontStyle: "italic"
-          }}>
+        <div className="bg-primary-50 border border-primary-500/60 rounded-lg p-4 shadow-sm">
+          <p className="m-0 text-sm text-neutral-800 leading-relaxed italic">
             💭 {hint}
           </p>
         </div>

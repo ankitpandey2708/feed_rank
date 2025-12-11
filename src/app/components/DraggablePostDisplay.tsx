@@ -14,43 +14,25 @@ const DraggablePostDisplay = ({ post, index }: DraggablePostDisplayProps) => {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+          className={`
+            flex flex-col items-center justify-center text-center
+            rounded-xl border transition-all duration-200
+            min-h-[80px] p-4
+            ${snapshot.isDragging
+              ? 'bg-gradient-to-b from-primary-500 to-primary-600 border-primary-600 shadow-primary text-white'
+              : 'bg-white border-neutral-200/60 shadow-sm hover:shadow-md hover:-translate-y-0.5'
+            }
+          `}
           style={{
             ...provided.draggableProps.style,
-            padding: "var(--space-4)",
-            backgroundColor: snapshot.isDragging ? "var(--color-primary)" : "var(--background)",
-            border: `1px solid ${snapshot.isDragging ? "var(--color-primary)" : "var(--color-gray-200)"}`,
-            borderRadius: "var(--radius-md)",
-            boxShadow: snapshot.isDragging ? "var(--shadow-lg)" : "var(--shadow-sm)",
-            transition: "all 0.2s ease",
-            cursor: "grab",
+            cursor: snapshot.isDragging ? "grabbing" : "grab",
             userSelect: "none",
-            minHeight: "80px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center",
-            color: snapshot.isDragging ? "#ffffff" : "var(--foreground)",
           }}
         >
-          <div
-            style={{
-              fontSize: "var(--text-lg)",
-              fontWeight: "600",
-              lineHeight: "1.4",
-              marginBottom: "var(--space-2)",
-              color: "inherit"
-            }}
-          >
+          <div className={`text-lg font-semibold mb-2 ${snapshot.isDragging ? 'text-white' : 'text-neutral-900'}`}>
             Post #{post.id}
           </div>
-          <div
-            style={{
-              fontSize: "var(--text-sm)",
-              color: snapshot.isDragging ? "#ffffff" : "var(--color-gray-500)",
-              lineHeight: "1.5"
-            }}
-          >
+          <div className={`text-sm ${snapshot.isDragging ? 'text-white/90' : 'text-neutral-600'}`}>
             ↑ {post.upvotes} ↓ {post.downvotes}
           </div>
         </div>
