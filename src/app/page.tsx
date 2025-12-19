@@ -105,9 +105,9 @@ export default function Home() {
           {/* Game Card */}
           <div className="relative group">
             {/* Glow effect on hover */}
-            <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-electric/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 blur-xl" />
+            <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-electric/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 blur-xl pointer-events-none" />
 
-            <div className="relative bg-surface border border-white/[0.08] rounded-2xl shadow-xl overflow-hidden">
+            <div className="relative bg-surface border border-white/[0.08] rounded-2xl shadow-xl">
               {/* Card Header */}
               <div className="px-6 sm:px-8 pt-8 pb-6 border-b border-white/[0.06]">
                 <h2 className="font-display text-xl sm:text-2xl font-semibold text-ivory mb-2">
