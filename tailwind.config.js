@@ -7,113 +7,197 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // Premium Color Palette - Indigo-based (Stripe-inspired)
+      /* ═══════════════════════════════════════════════════════════════════════
+         INK & ELECTRIC — Color System
+         A bold editorial palette with unexpected energy
+         ═══════════════════════════════════════════════════════════════════════ */
       colors: {
-        primary: {
-          50:  '#eef2ff',
-          100: '#e0e7ff',
-          200: '#c7d2fe',
-          300: '#a5b4fc',
-          400: '#818cf8',
-          500: '#6366f1',  // Main brand color
-          600: '#4f46e5',
-          700: '#4338ca',
-          800: '#3730a3',
-          900: '#312e81',
+        // Core Ink Scale
+        ink: {
+          DEFAULT: '#0a0a0a',
+          soft: '#141414',
+          muted: '#1a1a1a',
         },
-        neutral: {
-          0:   '#ffffff',
-          50:  '#fafbfc',  // Main background - warmer than pure white
-          100: '#f5f7fa',
-          200: '#e4e7eb',
-          300: '#cbd2d9',
-          400: '#9aa5b1',
-          500: '#7b8794',
-          600: '#616e7c',
-          700: '#52606d',
-          800: '#3e4c59',
-          900: '#323f4b',
-          950: '#1f2933',
+        charcoal: '#262626',
+        graphite: '#404040',
+        slate: '#525252',
+        ash: '#737373',
+        stone: '#a3a3a3',
+        mist: '#d4d4d4',
+        cloud: '#e5e5e5',
+        ivory: '#fafafa',
+        cream: '#fefce8',
+
+        // Electric — The Signature Accent
+        electric: {
+          DEFAULT: '#a3e635',
+          bright: '#bef264',
+          dim: '#84cc16',
+          dark: '#65a30d',
+          glow: 'rgba(163, 230, 53, 0.15)',
+          subtle: 'rgba(163, 230, 53, 0.08)',
         },
-        accent: {
-          500: '#a855f7',
-          600: '#9333ea',
-        },
+
+        // Semantic Colors
         success: {
-          50:  '#ecfdf5',
-          500: '#10b981',
-          600: '#059669',
-          700: '#047857',
-        },
-        error: {
-          50:  '#fef2f2',
-          500: '#ef4444',
-          600: '#dc2626',
+          DEFAULT: '#22c55e',
+          soft: 'rgba(34, 197, 94, 0.12)',
+          dark: '#16a34a',
         },
         warning: {
-          50:  '#fffbeb',
-          500: '#f59e0b',
-          600: '#d97706',
-          700: '#b45309',
-          800: '#92400e',
+          DEFAULT: '#f59e0b',
+          soft: 'rgba(245, 158, 11, 0.12)',
+          dark: '#d97706',
+        },
+        error: {
+          DEFAULT: '#ef4444',
+          soft: 'rgba(239, 68, 68, 0.12)',
+          dark: '#dc2626',
+        },
+
+        // Surface Colors
+        surface: {
+          DEFAULT: '#141414',
+          elevated: '#1a1a1a',
+          hover: '#262626',
         },
       },
-      // Premium Typography
+
+      /* ═══════════════════════════════════════════════════════════════════════
+         Typography System
+         ═══════════════════════════════════════════════════════════════════════ */
+      fontFamily: {
+        display: ['var(--font-playfair)', 'Georgia', 'Times New Roman', 'serif'],
+        sans: ['var(--font-dm-sans)', 'system-ui', '-apple-system', 'sans-serif'],
+        mono: ['var(--font-jetbrains-mono)', 'Monaco', 'Courier New', 'monospace'],
+      },
       fontSize: {
-        xs:   ['0.75rem', { lineHeight: '1.5', letterSpacing: '0.02em' }],
-        sm:   ['0.875rem', { lineHeight: '1.5', letterSpacing: '0.01em' }],
-        base: ['1rem', { lineHeight: '1.6', letterSpacing: '0' }],
-        lg:   ['1.125rem', { lineHeight: '1.5', letterSpacing: '0' }],
-        xl:   ['1.25rem', { lineHeight: '1.4', letterSpacing: '-0.01em' }],
-        '2xl': ['1.5rem', { lineHeight: '1.3', letterSpacing: '-0.02em' }],
-        '3xl': ['2rem', { lineHeight: '1.2', letterSpacing: '-0.02em' }],
-        '4xl': ['2.5rem', { lineHeight: '1.1', letterSpacing: '-0.03em' }],
-        '5xl': ['3rem', { lineHeight: '1.1', letterSpacing: '-0.03em' }],
+        'xs':   ['0.75rem', { lineHeight: '1.5', letterSpacing: '0.02em' }],
+        'sm':   ['0.875rem', { lineHeight: '1.5', letterSpacing: '0.01em' }],
+        'base': ['1rem', { lineHeight: '1.6', letterSpacing: '0' }],
+        'lg':   ['1.125rem', { lineHeight: '1.5', letterSpacing: '0' }],
+        'xl':   ['1.25rem', { lineHeight: '1.4', letterSpacing: '-0.01em' }],
+        '2xl':  ['1.5rem', { lineHeight: '1.3', letterSpacing: '-0.02em' }],
+        '3xl':  ['2rem', { lineHeight: '1.2', letterSpacing: '-0.02em' }],
+        '4xl':  ['2.5rem', { lineHeight: '1.1', letterSpacing: '-0.03em' }],
+        '5xl':  ['3.5rem', { lineHeight: '1.05', letterSpacing: '-0.03em' }],
+        '6xl':  ['4.5rem', { lineHeight: '1', letterSpacing: '-0.04em' }],
+        'hero': ['6rem', { lineHeight: '0.95', letterSpacing: '-0.04em' }],
       },
-      // Premium Shadows - Layered for depth
+      letterSpacing: {
+        'editorial': '-0.04em',
+        'tight': '-0.02em',
+        'wide': '0.05em',
+        'wider': '0.1em',
+      },
+
+      /* ═══════════════════════════════════════════════════════════════════════
+         Shadows — Dramatic Depths
+         ═══════════════════════════════════════════════════════════════════════ */
       boxShadow: {
-        'sm': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-        'DEFAULT': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1)',
-        'md': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)',
-        'lg': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)',
-        'xl': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
-        'primary': '0 8px 16px -4px rgba(99, 102, 241, 0.2), 0 4px 8px -2px rgba(99, 102, 241, 0.1)',
+        'sm': '0 1px 2px rgba(0, 0, 0, 0.4)',
+        'DEFAULT': '0 2px 8px rgba(0, 0, 0, 0.45)',
+        'md': '0 4px 12px rgba(0, 0, 0, 0.5)',
+        'lg': '0 8px 24px rgba(0, 0, 0, 0.6)',
+        'xl': '0 16px 48px rgba(0, 0, 0, 0.7)',
+        '2xl': '0 24px 64px rgba(0, 0, 0, 0.8)',
+        'electric': '0 0 30px rgba(163, 230, 53, 0.3)',
+        'electric-sm': '0 0 15px rgba(163, 230, 53, 0.2)',
+        'electric-lg': '0 0 50px rgba(163, 230, 53, 0.4)',
+        'glow': '0 0 60px rgba(163, 230, 53, 0.2)',
+        'inner-electric': 'inset 0 0 20px rgba(163, 230, 53, 0.1)',
       },
-      // Refined Border Radius
+
+      /* ═══════════════════════════════════════════════════════════════════════
+         Border Radius
+         ═══════════════════════════════════════════════════════════════════════ */
       borderRadius: {
-        'sm':   '0.375rem',
-        'DEFAULT': '0.5rem',
-        'lg':   '0.75rem',
-        'xl':   '1rem',
-        '2xl':  '1.5rem',
+        'sm': '4px',
+        'DEFAULT': '8px',
+        'md': '8px',
+        'lg': '12px',
+        'xl': '16px',
+        '2xl': '24px',
+        '3xl': '32px',
       },
-      // Premium Transitions
+
+      /* ═══════════════════════════════════════════════════════════════════════
+         Spacing Extensions
+         ═══════════════════════════════════════════════════════════════════════ */
+      spacing: {
+        '18': '4.5rem',
+        '22': '5.5rem',
+        '26': '6.5rem',
+        '30': '7.5rem',
+      },
+
+      /* ═══════════════════════════════════════════════════════════════════════
+         Transitions & Animations
+         ═══════════════════════════════════════════════════════════════════════ */
       transitionDuration: {
         '75': '75ms',
         '150': '150ms',
-        '200': '200ms',
-        '300': '300ms',
-        '500': '500ms',
+        '250': '250ms',
+        '400': '400ms',
+        '600': '600ms',
       },
       transitionTimingFunction: {
-        'ease-out': 'cubic-bezier(0, 0, 0.2, 1)',
-        'ease-in': 'cubic-bezier(0.4, 0, 1, 1)',
-        'ease-in-out': 'cubic-bezier(0.4, 0, 0.2, 1)',
+        'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
+        'out': 'cubic-bezier(0, 0, 0.2, 1)',
+        'in': 'cubic-bezier(0.4, 0, 1, 1)',
         'spring': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+        'bounce': 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
       },
-      // Animation
       animation: {
-        'shimmer': 'shimmer 2s infinite',
-        'fade-in': 'fadeIn 0.3s ease-out forwards',
+        'fade-in': 'fadeIn 0.5s cubic-bezier(0, 0, 0.2, 1) forwards',
+        'fade-in-up': 'fadeInUp 0.6s cubic-bezier(0, 0, 0.2, 1) forwards',
+        'scale-in': 'scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
+        'slide-in-left': 'slideInLeft 0.5s cubic-bezier(0, 0, 0.2, 1) forwards',
+        'glow-pulse': 'glowPulse 2s ease-in-out infinite',
+        'float': 'float 3s ease-in-out infinite',
+        'shimmer': 'shimmer 2s linear infinite',
+        'spin-slow': 'spin 3s linear infinite',
       },
       keyframes: {
-        shimmer: {
-          '100%': { transform: 'translateX(100%)' },
-        },
         fadeIn: {
-          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '0%': { opacity: '0', transform: 'translateY(12px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(24px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        scaleIn: {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        slideInLeft: {
+          '0%': { opacity: '0', transform: 'translateX(-24px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        glowPulse: {
+          '0%, 100%': { boxShadow: '0 0 20px rgba(163, 230, 53, 0.2)' },
+          '50%': { boxShadow: '0 0 40px rgba(163, 230, 53, 0.4)' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-6px)' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+      },
+
+      /* ═══════════════════════════════════════════════════════════════════════
+         Background Images
+         ═══════════════════════════════════════════════════════════════════════ */
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-electric': 'linear-gradient(135deg, #a3e635, #84cc16)',
+        'gradient-electric-soft': 'linear-gradient(135deg, rgba(163, 230, 53, 0.2), rgba(132, 204, 22, 0.1))',
+        'gradient-dark': 'linear-gradient(180deg, #0a0a0a, #141414)',
+        'gradient-surface': 'linear-gradient(180deg, #141414, #1a1a1a)',
       },
     },
   },
