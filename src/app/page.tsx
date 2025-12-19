@@ -127,7 +127,7 @@ export default function Home() {
                       <div
                         ref={provided.innerRef}
                         {...provided.droppableProps}
-                        className="space-y-3 stagger-children"
+                        className="space-y-3"
                       >
                         {posts.map((post, idx) => (
                           <DraggablePostDisplay key={post.id} post={post} index={idx} />

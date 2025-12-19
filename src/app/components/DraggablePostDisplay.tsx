@@ -19,10 +19,10 @@ const DraggablePostDisplay = ({ post, index }: DraggablePostDisplayProps) => {
           {...provided.dragHandleProps}
           className={`
             group relative flex items-center gap-4 p-4 sm:p-5
-            rounded-xl border transition-all duration-250
+            rounded-xl border
             ${snapshot.isDragging
-              ? 'bg-electric text-ink border-electric shadow-electric-lg scale-[1.02] z-50'
-              : 'bg-ink-muted border-white/[0.08] hover:border-electric/30 hover:bg-surface-hover'
+              ? 'bg-electric text-ink border-electric shadow-electric-lg z-50'
+              : 'bg-ink-muted border-white/[0.08] hover:border-electric/30 hover:bg-surface-hover transition-colors duration-200'
             }
           `}
           style={{
