@@ -11,45 +11,70 @@ const SessionDisplay = ({ session }: SessionDisplayProps) => {
     ? Math.round((session.totalScore / session.maxPossibleScore) * 100)
     : 0;
 
+  const stats = [
+    {
+      label: 'Rounds',
+      value: session.roundsPlayed,
+      color: 'text-electric',
+    },
+    {
+      label: 'Success',
+      value: `${successRate}%`,
+      color: 'text-success',
+    },
+    {
+      label: 'Streak',
+      value: session.streak,
+      color: session.streak > 0 ? 'text-warning' : 'text-stone',
+    },
+    {
+      label: 'Score',
+      value: `${session.totalScore}/${session.maxPossibleScore}`,
+      color: 'text-ivory',
+    },
+  ];
+
   return (
-    <div className="bg-white border border-neutral-200/60 rounded-xl p-6 mb-8 shadow-md hover:shadow-lg transition-all duration-300">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-        <div>
-          <div className="text-4xl font-bold text-primary-500 mb-1">
-            {session.roundsPlayed}
-          </div>
-          <div className="text-xs font-medium text-neutral-500 uppercase tracking-wide">
-            Rounds
-          </div>
-        </div>
+    <div className="mb-8 sm:mb-10 animate-fade-in">
+      <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+        {stats.map((stat, idx) => (
+          <div
+            key={stat.label}
+            className="group relative"
+            style={{ animationDelay: `${idx * 50}ms` }}
+          >
+            {/* Hover glow */}
+            <div className="absolute -inset-px rounded-xl bg-electric/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md" />
 
-        <div>
-          <div className="text-4xl font-bold text-success-500 mb-1">
-            {successRate}%
-          </div>
-          <div className="text-xs font-medium text-neutral-500 uppercase tracking-wide">
-            Success
-          </div>
-        </div>
+            <div className="relative flex items-center gap-3 px-4 sm:px-5 py-3 bg-surface border border-white/[0.08] rounded-xl hover:border-white/[0.15] transition-colors duration-250">
+              {/* Value */}
+              <span className={`font-mono text-xl sm:text-2xl font-bold ${stat.color}`}>
+                {stat.value}
+              </span>
 
-        <div>
-          <div className="text-4xl font-bold text-warning-500 mb-1">
-            {session.streak}
-          </div>
-          <div className="text-xs font-medium text-neutral-500 uppercase tracking-wide">
-            Streak
-          </div>
-        </div>
+              {/* Divider */}
+              <div className="w-px h-6 bg-white/10" />
 
-        <div>
-          <div className="text-4xl font-bold text-neutral-900 mb-1">
-            {session.totalScore}/{session.maxPossibleScore}
+              {/* Label */}
+              <span className="text-xs font-medium text-stone uppercase tracking-wider">
+                {stat.label}
+              </span>
+            </div>
           </div>
-          <div className="text-xs font-medium text-neutral-500 uppercase tracking-wide">
-            Total Score
-          </div>
-        </div>
+        ))}
       </div>
+
+      {/* Streak fire indicator */}
+      {session.streak >= 3 && (
+        <div className="mt-4 flex justify-center animate-float">
+          <div className="flex items-center gap-2 px-4 py-2 bg-warning/10 border border-warning/30 rounded-full">
+            <span className="text-warning text-lg">🔥</span>
+            <span className="text-sm font-medium text-warning">
+              {session.streak} in a row!
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

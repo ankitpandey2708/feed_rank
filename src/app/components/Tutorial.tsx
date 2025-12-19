@@ -12,11 +12,11 @@ interface TutorialStep {
 
 const tutorialSteps: TutorialStep[] = [
   {
-    title: "Welcome to Feed Rank!",
+    title: "Welcome to FeedRank",
     content: "Learn how ranking algorithms work by comparing simple percentages vs. statistical confidence. This game will teach you why the Wilson Score algorithm is better than naive percentage-based sorting."
   },
   {
-    title: "How Most Sites Rank Content",
+    title: "How Most Sites Rank",
     content: "Most sites use simple percentages: upvotes ÷ total votes. A post with 19/20 votes (95%) would rank higher than 178/200 (89%).",
     example: {
       post1: "Post A: 19 ↑ 1 ↓ = 95%",
@@ -73,75 +73,135 @@ const Tutorial = ({ onComplete, onSkip }: TutorialProps) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl p-10 max-w-2xl w-full shadow-xl">
-        {/* Premium Progress indicator */}
-        <div className="flex gap-2 mb-8 justify-center">
-          {tutorialSteps.map((_, idx) => (
-            <div
-              key={idx}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                idx === currentStep
-                  ? 'w-8 bg-primary-500'
-                  : 'w-2 bg-neutral-300'
-              }`}
-            />
-          ))}
-        </div>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <div
+        className="absolute inset-0 bg-ink/90 backdrop-blur-md"
+        onClick={onSkip}
+      />
 
-        {/* Premium Content */}
-        <h2 className="text-3xl font-bold text-neutral-950 mb-4 text-center tracking-tight">
-          {step.title}
-        </h2>
+      {/* Modal */}
+      <div className="relative w-full max-w-2xl animate-scale-in">
+        {/* Glow effect */}
+        <div className="absolute -inset-1 bg-gradient-to-r from-electric/30 via-electric/10 to-electric/30 rounded-3xl blur-xl" />
 
-        <p className={`text-base leading-relaxed text-neutral-700 ${step.example ? 'mb-6' : 'mb-8'}`}>
-          {step.content}
-        </p>
-
-        {/* Premium Example */}
-        {step.example && (
-          <div className="bg-neutral-100 rounded-xl p-5 mb-6">
-            <div className="flex flex-col gap-3 mb-4">
-              <div className="p-3 bg-white rounded-lg text-sm font-mono shadow-sm">
-                {step.example.post1}
-              </div>
-              <div className="p-3 bg-white rounded-lg text-sm font-mono shadow-sm">
-                {step.example.post2}
-              </div>
+        <div className="relative bg-surface border border-white/[0.08] rounded-2xl shadow-2xl overflow-hidden">
+          {/* Header with progress */}
+          <div className="px-8 pt-8 pb-6">
+            {/* Progress dots */}
+            <div className="flex items-center justify-center gap-2 mb-8">
+              {tutorialSteps.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentStep(idx)}
+                  className={`
+                    h-1.5 rounded-full transition-all duration-300 cursor-pointer
+                    ${idx === currentStep
+                      ? 'w-8 bg-electric'
+                      : idx < currentStep
+                        ? 'w-1.5 bg-electric/50'
+                        : 'w-1.5 bg-white/20'
+                    }
+                  `}
+                  aria-label={`Go to step ${idx + 1}`}
+                />
+              ))}
             </div>
-            <p className="text-sm text-neutral-600 italic m-0">
-              {step.example.explanation}
-            </p>
-          </div>
-        )}
 
-        {/* Premium Navigation buttons */}
-        <div className="flex justify-between gap-4">
-          <div className="flex gap-3">
-            {currentStep > 0 && (
-              <button
-                onClick={handlePrev}
-                className="px-5 py-3 bg-white text-neutral-900 border border-neutral-300 rounded-lg hover:bg-neutral-50 hover:border-neutral-400 cursor-pointer text-sm font-semibold transition-all duration-200 shadow-sm hover:shadow-md"
-              >
-                ← Previous
-              </button>
-            )}
-            {!isLastStep && (
-              <button
-                onClick={onSkip}
-                className="px-5 py-3 bg-transparent text-neutral-600 hover:text-neutral-900 border-none cursor-pointer text-sm font-medium transition-colors"
-              >
-                Skip Tutorial
-              </button>
-            )}
+            {/* Step counter */}
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <span className="text-xs font-mono text-stone uppercase tracking-wider">
+                Step {currentStep + 1} of {tutorialSteps.length}
+              </span>
+            </div>
+
+            {/* Title */}
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-ivory text-center tracking-editorial">
+              {step.title}
+            </h2>
           </div>
-          <button
-            onClick={handleNext}
-            className="group relative px-8 py-3 bg-gradient-to-b from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white rounded-lg cursor-pointer text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200"
-          >
-            <span className="relative z-10">{isLastStep ? "Start Playing!" : "Next →"}</span>
-            <div className="absolute inset-0 rounded-lg bg-white opacity-0 group-hover:opacity-10 transition-opacity" />
-          </button>
+
+          {/* Content */}
+          <div className="px-8 pb-8">
+            <p className="text-base sm:text-lg text-mist leading-relaxed text-center mb-8">
+              {step.content}
+            </p>
+
+            {/* Example */}
+            {step.example && (
+              <div className="bg-ink-muted border border-white/[0.06] rounded-xl p-6 mb-8">
+                <div className="space-y-3 mb-4">
+                  <div className="flex items-center gap-3 p-3 bg-surface rounded-lg">
+                    <div className="w-2 h-2 bg-success rounded-full" />
+                    <span className="font-mono text-sm text-ivory">{step.example.post1}</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 bg-surface rounded-lg">
+                    <div className="w-2 h-2 bg-warning rounded-full" />
+                    <span className="font-mono text-sm text-ivory">{step.example.post2}</span>
+                  </div>
+                </div>
+                <p className="text-sm text-stone italic text-center">
+                  {step.example.explanation}
+                </p>
+              </div>
+            )}
+
+            {/* Navigation */}
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                {currentStep > 0 && (
+                  <button
+                    onClick={handlePrev}
+                    className="group flex items-center gap-2 px-5 py-3 bg-surface border border-white/[0.08] rounded-xl hover:border-white/[0.15] cursor-pointer text-sm font-semibold text-ivory transition-all duration-250"
+                  >
+                    <svg
+                      className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-250"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+                    </svg>
+                    Back
+                  </button>
+                )}
+                {!isLastStep && (
+                  <button
+                    onClick={onSkip}
+                    className="px-4 py-3 text-sm font-medium text-stone hover:text-ivory transition-colors cursor-pointer"
+                  >
+                    Skip tutorial
+                  </button>
+                )}
+              </div>
+
+              <button
+                onClick={handleNext}
+                className="group relative flex items-center gap-2 px-8 py-3 bg-electric text-ink rounded-xl font-semibold shadow-electric hover:shadow-electric-lg hover:-translate-y-0.5 cursor-pointer transition-all duration-250 overflow-hidden"
+              >
+                <span className="relative z-10">
+                  {isLastStep ? "Start Playing" : "Next"}
+                </span>
+                <svg
+                  className={`relative z-10 w-4 h-4 transition-transform duration-250 ${isLastStep ? '' : 'group-hover:translate-x-1'}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              </button>
+            </div>
+          </div>
+
+          {/* Decorative corner */}
+          <div className="absolute top-0 right-0 w-32 h-32 pointer-events-none">
+            <div className="absolute top-4 right-4 w-16 h-16 border border-electric/20 rounded-full" />
+            <div className="absolute top-8 right-8 w-8 h-8 border border-electric/30 rounded-full" />
+          </div>
         </div>
       </div>
     </div>
