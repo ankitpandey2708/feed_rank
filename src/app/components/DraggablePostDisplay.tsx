@@ -22,7 +22,7 @@ const DraggablePostDisplay = ({ post, index }: DraggablePostDisplayProps) => {
             rounded-xl border
             transition-[background-color,border-color,box-shadow,opacity] duration-250
             ${snapshot.isDragging
-              ? 'bg-electric text-ink border-electric shadow-electric-lg scale-[1.02]'
+              ? 'bg-electric text-ink border-electric shadow-electric-lg'
               : 'bg-ink-muted border-white/[0.08] hover:border-electric/30 hover:bg-surface-hover'
             }
           `}
@@ -31,6 +31,9 @@ const DraggablePostDisplay = ({ post, index }: DraggablePostDisplayProps) => {
             cursor: snapshot.isDragging ? "grabbing" : "grab",
             userSelect: "none",
             zIndex: snapshot.isDragging ? 1000 : 'auto',
+            transform: snapshot.isDragging
+              ? `${provided.draggableProps.style?.transform || ''} scale(1.02)`.trim()
+              : provided.draggableProps.style?.transform,
           }}
         >
           {/* Rank indicator */}
