@@ -75,6 +75,7 @@ export function useFeedRankGame() {
   const [hintsEnabled, setHintsEnabled] = useState(true);
   const [currentHint, setCurrentHint] = useState<string | null>(null);
   const [validationIssues, setValidationIssues] = useState<string[]>([]);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   const generateCuratedPosts = (): Post[] => {
     const exampleSet = getNextExampleSet(
@@ -91,13 +92,13 @@ export function useFeedRankGame() {
     setPosts(generateCuratedPosts());
   }, []);
 
-  // Update validation when posts change
+  // Update validation when posts change (only after user has interacted)
   useEffect(() => {
-    if (!isSubmitted && posts.length > 0) {
+    if (!isSubmitted && posts.length > 0 && hasInteracted) {
       const issues = provideLiveValidation(posts);
       setValidationIssues(issues);
     }
-  }, [posts, isSubmitted]);
+  }, [posts, isSubmitted, hasInteracted]);
 
   const isValidRanks = () => posts.length === 3;
 
@@ -139,11 +140,13 @@ export function useFeedRankGame() {
     setScore(null);
     setCurrentHint(null);
     setValidationIssues([]);
+    setHasInteracted(false);
   };
 
   const handleDragEnd = (result: any) => {
     if (!result.destination) return;
 
+    setHasInteracted(true);
     const reordered = Array.from(posts);
     const [removed] = reordered.splice(result.source.index, 1);
     reordered.splice(result.destination.index, 0, removed);
