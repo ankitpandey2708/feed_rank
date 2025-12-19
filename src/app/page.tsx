@@ -123,11 +123,11 @@ export default function Home() {
               <div className="p-4 sm:p-6">
                 <DragDropContext onDragEnd={handleDragEnd}>
                   <Droppable droppableId="posts-droppable">
-                    {(provided) => (
+                    {(provided, snapshot) => (
                       <div
                         ref={provided.innerRef}
                         {...provided.droppableProps}
-                        className="space-y-3 stagger-children"
+                        className="space-y-3"
                       >
                         {posts.map((post, idx) => (
                           <DraggablePostDisplay key={post.id} post={post} index={idx} />

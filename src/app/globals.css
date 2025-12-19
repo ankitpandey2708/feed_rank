@@ -282,6 +282,30 @@ body::before {
 .stagger-children > *:nth-child(6) { animation-delay: 300ms; }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   DRAG & DROP PLACEHOLDER
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Style the drag placeholder to show drop zone clearly */
+[data-rfd-placeholder-context-id] {
+  min-height: 80px !important;
+  margin: 12px 0;
+  border: 2px dashed rgba(163, 230, 53, 0.4) !important;
+  border-radius: 12px;
+  background: rgba(163, 230, 53, 0.05) !important;
+  transition: all 0.2s ease;
+}
+
+/* Ensure dragged items stay on top */
+[data-rfd-draggable-context-id] {
+  position: relative;
+}
+
+/* Smooth transition when item is dropped */
+[data-rfd-draggable-context-id]:not([data-is-dragging="true"]) {
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    FOCUS & ACCESSIBILITY
    ═══════════════════════════════════════════════════════════════════════════ */
 
