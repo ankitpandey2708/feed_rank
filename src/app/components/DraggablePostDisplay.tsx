@@ -12,7 +12,15 @@ const DraggablePostDisplay = ({ post, index }: DraggablePostDisplayProps) => {
 
   return (
     <Draggable draggableId={post.id.toString()} index={index}>
-      {(provided, snapshot) => (
+      {(provided, snapshot) => {
+        const style = {
+          ...provided.draggableProps.style,
+          cursor: snapshot.isDragging ? "grabbing" : "grab",
+          userSelect: "none" as const,
+          zIndex: snapshot.isDragging ? 1000 : 'auto',
+        };
+
+        return (
         <div
           ref={provided.innerRef}
           {...provided.draggableProps}
@@ -26,15 +34,7 @@ const DraggablePostDisplay = ({ post, index }: DraggablePostDisplayProps) => {
               : 'bg-ink-muted border-white/[0.08] hover:border-electric/30 hover:bg-surface-hover'
             }
           `}
-          style={{
-            ...provided.draggableProps.style,
-            cursor: snapshot.isDragging ? "grabbing" : "grab",
-            userSelect: "none",
-            zIndex: snapshot.isDragging ? 1000 : 'auto',
-            transform: snapshot.isDragging
-              ? `${provided.draggableProps.style?.transform || ''} scale(1.02)`.trim()
-              : provided.draggableProps.style?.transform,
-          }}
+          style={style}
         >
           {/* Rank indicator */}
           <div
@@ -148,7 +148,8 @@ const DraggablePostDisplay = ({ post, index }: DraggablePostDisplayProps) => {
             <div className="absolute inset-0 rounded-xl ring-2 ring-electric ring-offset-2 ring-offset-ink pointer-events-none" />
           )}
         </div>
-      )}
+        );
+      }}
     </Draggable>
   );
 };

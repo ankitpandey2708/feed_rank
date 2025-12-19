@@ -127,7 +127,7 @@ export default function Home() {
                       <div
                         ref={provided.innerRef}
                         {...provided.droppableProps}
-                        className="space-y-3"
+                        className="flex flex-col gap-3"
                       >
                         {posts.map((post, idx) => (
                           <DraggablePostDisplay key={post.id} post={post} index={idx} />
