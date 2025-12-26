@@ -6,7 +6,7 @@
 
   <!-- Main page -->
   <url>
-    <loc>https://feedrank.com/</loc>
+    <loc>https://feed-rank.vercel.app/</loc>
     <lastmod>2025-12-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>

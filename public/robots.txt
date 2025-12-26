@@ -8,4 +8,4 @@ Allow: /
 Disallow: /api/
 
 # Sitemap location
-Sitemap: https://feedrank.com/sitemap.xml
+Sitemap: https://feed-rank.vercel.app/sitemap.xml
