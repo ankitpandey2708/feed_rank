@@ -1,0 +1,11 @@
+# Feed Rank - Robots.txt
+
+# Allow all search engines to crawl the site
+User-agent: *
+Allow: /
+
+# Disallow crawling of API routes (if any are added in the future)
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://feed-rank.vercel.app/sitemap.xml
