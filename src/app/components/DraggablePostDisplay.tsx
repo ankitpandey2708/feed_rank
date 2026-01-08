@@ -98,7 +98,7 @@ const DraggablePostDisplay = ({ post, index }: DraggablePostDisplayProps) => {
               </svg>
               <span
                 className={`
-                  font-mono text-sm font-semibold transition-colors duration-250
+                  inline-block w-10 text-right tabular-nums font-mono text-sm font-semibold transition-colors duration-250
                   ${snapshot.isDragging ? 'text-ink/80' : 'text-ivory'}
                 `}
               >
@@ -119,7 +119,7 @@ const DraggablePostDisplay = ({ post, index }: DraggablePostDisplayProps) => {
               </svg>
               <span
                 className={`
-                  font-mono text-sm font-semibold transition-colors duration-250
+                  inline-block w-10 text-right tabular-nums font-mono text-sm font-semibold transition-colors duration-250
                   ${snapshot.isDragging ? 'text-ink/80' : 'text-ivory'}
                 `}
               >
