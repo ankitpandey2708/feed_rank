@@ -33,9 +33,6 @@ const DraggablePostDisplay = ({ post, index }: DraggablePostDisplayProps) => {
             touchAction: "none",
             willChange: "transform",
             zIndex: snapshot.isDragging ? 1000 : 'auto',
-            transform: snapshot.isDragging
-              ? `${provided.draggableProps.style?.transform || ''} scale(1.02)`.trim()
-              : provided.draggableProps.style?.transform,
           }}
         >
           {/* Rank indicator */}

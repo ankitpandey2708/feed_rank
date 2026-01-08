@@ -305,11 +305,6 @@ body::before {
   transition: none !important;
 }
 
-/* Smooth transition when item is dropped */
-[data-rfd-draggable-context-id]:not([data-is-dragging="true"]) {
-  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1);
-}
-
 /* ═══════════════════════════════════════════════════════════════════════════
    FOCUS & ACCESSIBILITY
    ═══════════════════════════════════════════════════════════════════════════ */
