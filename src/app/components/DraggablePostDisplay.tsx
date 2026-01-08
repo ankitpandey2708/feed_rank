@@ -84,48 +84,44 @@ const DraggablePostDisplay = ({ post, index }: DraggablePostDisplayProps) => {
           </div>
 
           {/* Vote Stats */}
-          <div className="flex items-center gap-4 sm:gap-6">
+          <div className="grid items-center gap-x-3 gap-y-2 sm:gap-x-4 grid-cols-[auto,2.5rem,auto,2.5rem,auto]">
             {/* Upvotes */}
-            <div className="flex items-center gap-1.5">
-              <svg
-                className={`w-4 h-4 transition-colors duration-250 ${
-                  snapshot.isDragging ? 'text-ink/60' : 'text-success'
-                }`}
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clipRule="evenodd" />
-              </svg>
-              <span
-                className={`
-                  inline-block w-10 text-right tabular-nums font-mono text-sm font-semibold transition-colors duration-250
-                  ${snapshot.isDragging ? 'text-ink/80' : 'text-ivory'}
-                `}
-              >
-                {post.upvotes}
-              </span>
-            </div>
+            <svg
+              className={`w-4 h-4 transition-colors duration-250 ${
+                snapshot.isDragging ? 'text-ink/60' : 'text-success'
+              }`}
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clipRule="evenodd" />
+            </svg>
+            <span
+              className={`
+                inline-block w-10 text-right tabular-nums font-mono text-sm font-semibold transition-colors duration-250
+                ${snapshot.isDragging ? 'text-ink/80' : 'text-ivory'}
+              `}
+            >
+              {post.upvotes}
+            </span>
 
             {/* Downvotes */}
-            <div className="flex items-center gap-1.5">
-              <svg
-                className={`w-4 h-4 transition-colors duration-250 ${
-                  snapshot.isDragging ? 'text-ink/60' : 'text-error'
-                }`}
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clipRule="evenodd" />
-              </svg>
-              <span
-                className={`
-                  inline-block w-10 text-right tabular-nums font-mono text-sm font-semibold transition-colors duration-250
-                  ${snapshot.isDragging ? 'text-ink/80' : 'text-ivory'}
-                `}
-              >
-                {post.downvotes}
-              </span>
-            </div>
+            <svg
+              className={`w-4 h-4 transition-colors duration-250 ${
+                snapshot.isDragging ? 'text-ink/60' : 'text-error'
+              }`}
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clipRule="evenodd" />
+            </svg>
+            <span
+              className={`
+                inline-block w-10 text-right tabular-nums font-mono text-sm font-semibold transition-colors duration-250
+                ${snapshot.isDragging ? 'text-ink/80' : 'text-ivory'}
+              `}
+            >
+              {post.downvotes}
+            </span>
 
             {/* Percentage badge */}
             <div
