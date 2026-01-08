@@ -55,7 +55,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center animate-fade-in">
+    <div className="flex flex-col items-center">
       {/* Tutorial Modal */}
       {showTutorial && (
         <Tutorial onComplete={handleTutorialComplete} onSkip={handleTutorialSkip} />
