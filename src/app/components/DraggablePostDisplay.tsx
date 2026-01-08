@@ -84,7 +84,7 @@ const DraggablePostDisplay = ({ post, index }: DraggablePostDisplayProps) => {
           </div>
 
           {/* Vote Stats */}
-          <div className="grid items-center gap-x-3 gap-y-2 sm:gap-x-4 grid-cols-[auto,2.5rem,auto,2.5rem,auto]">
+          <div className="grid items-center gap-x-3 gap-y-2 sm:gap-x-4 grid-cols-[auto,2.5rem,auto,2.5rem,6.5rem]">
             {/* Upvotes */}
             <svg
               className={`w-4 h-4 transition-colors duration-250 ${
@@ -126,7 +126,7 @@ const DraggablePostDisplay = ({ post, index }: DraggablePostDisplayProps) => {
             {/* Percentage badge */}
             <div
               className={`
-                hidden sm:flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-mono font-semibold
+                hidden sm:flex items-center justify-end gap-1 px-2.5 py-1 rounded-full text-xs font-mono font-semibold w-[6.5rem]
                 transition-all duration-250
                 ${snapshot.isDragging
                   ? 'bg-ink/20 text-ink'
