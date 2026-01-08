@@ -20,7 +20,7 @@ const DraggablePostDisplay = ({ post, index }: DraggablePostDisplayProps) => {
           className={`
             group relative flex items-center gap-4 p-4 sm:p-5
             rounded-xl border
-            transition-[background-color,border-color,box-shadow,opacity] duration-250
+            select-none transition-[background-color,border-color,box-shadow,opacity] duration-250
             ${snapshot.isDragging
               ? 'bg-electric text-ink border-electric shadow-electric-lg'
               : 'bg-ink-muted border-white/[0.08] hover:border-electric/30 hover:bg-surface-hover'
@@ -30,6 +30,8 @@ const DraggablePostDisplay = ({ post, index }: DraggablePostDisplayProps) => {
             ...provided.draggableProps.style,
             cursor: snapshot.isDragging ? "grabbing" : "grab",
             userSelect: "none",
+            touchAction: "none",
+            willChange: "transform",
             zIndex: snapshot.isDragging ? 1000 : 'auto',
             transform: snapshot.isDragging
               ? `${provided.draggableProps.style?.transform || ''} scale(1.02)`.trim()
