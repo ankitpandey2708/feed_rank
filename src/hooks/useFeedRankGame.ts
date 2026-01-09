@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Post, GameSession } from '@/types';
-import { getNextExampleSet, generatePostsFromExample } from '../../utils/curatedExamples';
+import { generatePostsFromExample, getNextCuratedExampleSet } from '../../utils/curatedExamples';
 
 // Helper function to create new game session
 function createNewSession(): GameSession {
@@ -76,15 +76,19 @@ export function useFeedRankGame() {
   const [currentHint, setCurrentHint] = useState<string | null>(null);
   const [validationIssues, setValidationIssues] = useState<string[]>([]);
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [shownExampleIds, setShownExampleIds] = useState<number[]>([]);
 
   const generateCuratedPosts = (): Post[] => {
-    const exampleSet = getNextExampleSet(
-      session.roundsPlayed,
-      session.consecutiveCorrect,
-      session.conceptsLearned
-    );
-    setCurrentKeyInsight(exampleSet.keyInsight);
-    return generatePostsFromExample(exampleSet);
+    const uniqueShownCount = new Set(shownExampleIds).size;
+    const shouldResetShown = uniqueShownCount >= 6;
+    const previousIds = shouldResetShown ? [] : shownExampleIds;
+    const curatedExampleSet = getNextCuratedExampleSet(previousIds);
+    setShownExampleIds(prev => {
+      const base = shouldResetShown ? [] : prev;
+      return [...base, curatedExampleSet.id];
+    });
+    setCurrentKeyInsight(curatedExampleSet.keyInsight);
+    return generatePostsFromExample(curatedExampleSet);
   };
 
   // Initialize posts on mount

@@ -184,6 +184,15 @@ export function getExampleByDifficulty(difficulty: Difficulty): ExampleSet {
   return filtered[randomIndex];
 }
 
+export function getNextCuratedExampleSet(previousIds: number[]): ExampleSet {
+  const remaining = exampleSets.find(exampleSet => !previousIds.includes(exampleSet.id));
+  if (remaining) {
+    return remaining;
+  }
+
+  return exampleSets[0];
+}
+
 export function getNextExampleSet(
   currentLevel: number,
   consecutiveCorrect: number,
