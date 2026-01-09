@@ -71,6 +71,15 @@ const ResultsDisplay = ({ score, resultsData, keyInsight }: ResultsDisplayProps)
   const correctOrder = [...withPercentageRank].sort((a, b) => a.actualRank - b.actualRank);
   const percentageRanked = [...withPercentageRank].sort((a, b) => (a.percentageRank || 0) - (b.percentageRank || 0));
   const isSameAsPercentage = userOrder.every((post, idx) => post.id === percentageRanked[idx]?.id);
+  const allPerfectRates = withPercentageRank.every(post => {
+    const total = post.upvotes + post.downvotes;
+    return total > 0 && post.downvotes === 0;
+  });
+  const showPercentage = !allPerfectRates;
+  const showUserRanking = !isSameAsPercentage || !showPercentage;
+  const visibleColumns = 1 + (showUserRanking ? 1 : 0) + (showPercentage ? 1 : 0);
+  const gridColumnsClass =
+    visibleColumns === 3 ? 'lg:grid-cols-3' : visibleColumns === 2 ? 'lg:grid-cols-2' : 'lg:grid-cols-1';
 
   const Card = ({
     post,
@@ -187,11 +196,9 @@ const ResultsDisplay = ({ score, resultsData, keyInsight }: ResultsDisplayProps)
       </div>
 
       {/* Three Column Comparison */}
-      <div
-        className={`grid grid-cols-1 gap-6 lg:gap-8 ${isSameAsPercentage ? 'lg:grid-cols-2' : 'lg:grid-cols-3'}`}
-      >
+      <div className={`grid grid-cols-1 gap-6 lg:gap-8 ${gridColumnsClass}`}>
         {/* Your Ranking */}
-        {!isSameAsPercentage && (
+        {showUserRanking && (
           <div className="space-y-4">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 bg-surface border border-white/[0.08] rounded-xl flex items-center justify-center">
@@ -213,24 +220,26 @@ const ResultsDisplay = ({ score, resultsData, keyInsight }: ResultsDisplayProps)
         )}
 
         {/* Percentage-Based */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 bg-warning/10 border border-warning/30 rounded-xl flex items-center justify-center">
-              <svg className="w-5 h-5 text-warning" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
+        {showPercentage && (
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 bg-warning/10 border border-warning/30 rounded-xl flex items-center justify-center">
+                <svg className="w-5 h-5 text-warning" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-display text-lg font-semibold text-warning">Percentage-Based</h3>
+                <p className="text-xs text-stone">The naive approach</p>
+              </div>
             </div>
-            <div>
-              <h3 className="font-display text-lg font-semibold text-warning">Percentage-Based</h3>
-              <p className="text-xs text-stone">The naive approach</p>
+            <div className="space-y-3 stagger-children">
+              {percentageRanked.map((post, idx) => (
+                <Card key={post.id} post={post} showScore={true} scoreType="percentage" index={idx} />
+              ))}
             </div>
           </div>
-          <div className="space-y-3 stagger-children">
-            {percentageRanked.map((post, idx) => (
-              <Card key={post.id} post={post} showScore={true} scoreType="percentage" index={idx} />
-            ))}
-          </div>
-        </div>
+        )}
 
         {/* Wilson Score */}
         <div className="space-y-4">
